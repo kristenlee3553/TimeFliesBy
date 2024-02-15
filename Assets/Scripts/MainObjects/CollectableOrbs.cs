@@ -19,6 +19,9 @@ public class CollectableOrbs : MonoBehaviour
 
             // Hide from scene
             transform.gameObject.SetActive(false);
+
+            // UI
+            GameUIHandler.Instance.SetOrbCounter();
         }
     }
 }

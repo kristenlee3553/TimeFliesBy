@@ -39,7 +39,7 @@ public class DeathZone : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wizard") && GameManager.s_onMoveableObject == false)
+        if (collision.gameObject.CompareTag("Wizard"))
         {   
             // Fairy is preserving an object that is not the wizard
             if (PreserveManager.IsPreserving() && !PreserveManager.IsPreservingWizard())

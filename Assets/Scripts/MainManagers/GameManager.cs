@@ -35,12 +35,12 @@ public static class GameManager
     /// <summary>
     /// Wizard's starting x position
     /// </summary>
-    public static float s_wizardResetX = -9.565638f;
+    public static float s_wizardResetX = -7.53f;
 
     /// <summary>
     /// Wizard's starting y position
     /// </summary>
-    public static float s_wizardResetY = 2.258681f;
+    public static float s_wizardResetY = 1.07f;
 
     /// <summary>
     /// Fairy's starting x position
@@ -57,12 +57,12 @@ public static class GameManager
     /// <summary>
     /// Wizard's Respawn x position
     /// </summary>
-    public static float s_wizardRespawnX = -9.565638f;
+    public static float s_wizardRespawnX = -7.53f;
 
     /// <summary>
     /// Wizard's Respawn y position
     /// </summary>
-    public static float s_wizardRespawnY = 2.258681f;
+    public static float s_wizardRespawnY = 1.07f;
 
     // --------------- Game Over Variables -------------------
     public static bool s_onMoveableObject = false;

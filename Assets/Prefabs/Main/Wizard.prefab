@@ -145,7 +145,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1153100598425247320
@@ -167,7 +167,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   slopeCheckDistance: 0.5
-  maxSlopeAngle: 25
+  maxSlopeAngle: 30
 --- !u!114 &-4228443284578964903
 MonoBehaviour:
   m_ObjectHideFlags: 0

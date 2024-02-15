@@ -9,7 +9,6 @@ public class FreezeObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         // If fairy is already preserving an object and wants to release object
         if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.IsPreserving())
         {
