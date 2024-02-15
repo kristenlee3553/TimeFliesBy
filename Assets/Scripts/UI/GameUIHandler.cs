@@ -20,7 +20,7 @@ public class GameUIHandler : MonoBehaviour
     private VisualElement m_resetButton;
 
     private VisualElement m_menuButton;
-    
+
     /// <summary>
     /// So that other classes can call methods here using the class name
     /// </summary>
@@ -100,6 +100,19 @@ public class GameUIHandler : MonoBehaviour
             fairy.transform.position = new Vector3(GameManager.s_fairyResetX, GameManager.s_fairyResetY, fairy.transform.position.z);
         }
 
+        // Orbs
+        GameManager.s_curOrbs[0] = false;
+        GameManager.s_curOrbs[1] = false;
+        GameManager.s_curOrbs[2] = false;
+
+        CollectableOrbs[] orbs = FindObjectsByType<CollectableOrbs>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        for (int x = 0; x < orbs.Length; x++)
+        {
+            orbs[x].gameObject.SetActive(true);
+        }
+
+
         // Reset all preserving variables
         PreserveManager.SetPreservableObject(null);
         PreserveManager.SetPreservedObject(null);
@@ -120,9 +133,6 @@ public class GameUIHandler : MonoBehaviour
         GameManager.s_phase = 1;
 
         // UI
-        GameManager.s_curOrbs[0] = false;
-        GameManager.s_curOrbs[1] = false;
-        GameManager.s_curOrbs[2] = false;
         SetPhase(1);
         SetOrbCounter();
 
