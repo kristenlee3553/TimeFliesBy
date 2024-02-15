@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="TimeBarBackground" style="flex-grow: 0; background-image: url(&apos;project://database/Assets/Art/Main/UI/track.png?fileID=21300000&amp;guid=2be9017a726169146882bff54dc7e5f1&amp;type=3#track&apos;); height: 10%; width: 75%; flex-direction: column; -unity-background-scale-mode: scale-to-fit; background-color: rgba(255, 255, 255, 0); align-self: center; transform-origin: center; bottom: 0; left: 0; top: 92%; right: 0;">
+        <ui:VisualElement name="TimeBarContainer" style="flex-grow: 1; width: 1436px; height: 68px; position: absolute; top: 20px; left: 2px;">
+            <ui:VisualElement name="TimeBar" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Main/UI/wave-increment.png?fileID=21300000&amp;guid=4bf33b4dad4b2e9468f4cceb445071d9&amp;type=3#wave-increment&apos;); width: 100%; height: 100%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
