@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class ChangeTime : MonoBehaviour
 {
-    // Script that manages death
+    // Script that manages reseting of level
     private ResetManager resetManager;
     private FairyMovement fairyMove;
 

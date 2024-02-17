@@ -2,6 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// HANDLES RESETTING OF LEVEL, CHANGING PHASES, DEATH ANIMATION
+/// </summary>
 public class ResetManager : MonoBehaviour
 {
     [SerializeField] private GameObject wizard;

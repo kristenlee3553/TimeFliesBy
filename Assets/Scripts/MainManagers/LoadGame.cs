@@ -31,7 +31,7 @@ public class LoadGame : MonoBehaviour
         GameManager.s_keyBinds.Add(GameManager.KeyBind.MoveTimeBack, KeyCode.Q);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.MoveTimeFor, KeyCode.E);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Preserve, KeyCode.Space);
-        GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.F);
+        GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.P);
 
         StartCoroutine(SetUpLevel());
     }

@@ -105,7 +105,7 @@ public class WizardMovement : MonoBehaviour
 
     // Script that manages death
     private ResetManager resetManager;
-    public bool dead = false;
+    private bool dead = false;
 
     private IInteractable interactObject;
 
