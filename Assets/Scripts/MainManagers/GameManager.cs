@@ -101,6 +101,7 @@ public static class GameManager
 
     // ---------------- Saved Data for Orbs --------------------------------
     public static bool[] s_dinoOrbs = { false, false, false };
+    public static bool[] s_medOrbs = { false, false, false };
 
     // ---------------- Current level orb data -------------------------
     /// <summary>

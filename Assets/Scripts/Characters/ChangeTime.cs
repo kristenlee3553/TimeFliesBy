@@ -9,37 +9,42 @@ using UnityEngine.SceneManagement;
 public class ChangeTime : MonoBehaviour
 {
     // Script that manages death
-    private Death deathScript;
+    private ResetManager resetManager;
+    private FairyMovement fairyMove;
 
     private void Start()
     {
-        deathScript = GetComponent<Death>();
+        fairyMove = GetComponent<FairyMovement>();
+        resetManager = GetComponent<ResetManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Go back in time
-        if (Input.GetKeyUp(KeyCode.Q))
+        if (!fairyMove.noInputFairy)
         {
-
-            // If not at first phase
-            if (!MinPhase())
+            // Go back in time
+            if (Input.GetKeyUp(KeyCode.Q))
             {
-                GameManager.s_phase--;
-                StartCoroutine(ChangeScene());
+
+                // If not at first phase
+                if (!MinPhase())
+                {
+                    GameManager.s_phase--;
+                    resetManager.ChangePhase();
+                }
+
             }
 
-        }
-
-        // Go Forward in Time
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            // If not at last phase
-            if (!MaxPhase())
+            // Go Forward in Time
+            if (Input.GetKeyUp(KeyCode.E))
             {
-                GameManager.s_phase++;
-                StartCoroutine(ChangeScene());
+                // If not at last phase
+                if (!MaxPhase())
+                {
+                    GameManager.s_phase++;
+                    resetManager.ChangePhase();
+                }
             }
         }
 
@@ -63,70 +68,5 @@ public class ChangeTime : MonoBehaviour
         return GameManager.s_phase == 1;
     }
 
-    IEnumerator ChangeScene()
-    {
-        // Name of next scene
-        string next_scene = GameManager.s_level + GameManager.s_phase.ToString();
-
-        // Load new scene
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(next_scene, LoadSceneMode.Additive);
-
-        // Wait until scene is loaded
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        // If fairy is preserving an object that is not the wizard
-        if (PreserveManager.IsPreserving() && !PreserveManager.IsPreservingWizard())
-        {
-            // Object to hide
-            string tagToFind = PreserveManager.GetPreservedObject().tag;
-
-            // FInd objects to hide
-            GameObject[] dups = GameObject.FindGameObjectsWithTag(tagToFind);
-            foreach (GameObject dup in dups)
-            {
-                // If object is not the same as preserved object
-                if (GameObject.ReferenceEquals(dup, PreserveManager.GetPreservedObject()) == false)
-                {
-                    // Hide object
-                    dup.SetActive(false);
-                }
-            }
-
-            // Move preserved object to scene
-            SceneManager.MoveGameObjectToScene(PreserveManager.GetPreservedObject(), SceneManager.GetSceneByName(next_scene));
-
-        }
-
-        // Level specific code
-        if (GameManager.s_level == "Dino")
-        {
-            // Cave
-            if (!DinoManager.s_inCave)
-            {
-                GameObject nest = GameObject.FindGameObjectWithTag("Nest");
-                
-                if (nest != null)
-                {
-                    nest.SetActive(false);
-                }
-            }
-        }
-
-        // Remove last scene
-        SceneManager.UnloadSceneAsync(GameManager.s_currentScene);
-
-        // Update variable
-        GameManager.s_currentScene = next_scene;
-
-        GameUIHandler.Instance.SetPhase(GameManager.s_phase);
-
-        // Game Over
-        if (GameManager.s_onMoveableObject)
-        {
-            deathScript.Die();
-        }
-    }
+ 
 }

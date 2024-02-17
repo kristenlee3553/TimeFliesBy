@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rbFairy: {fileID: 7328277961955968279}
+  noInputFairy: 0
 --- !u!50 &7328277961955968279
 Rigidbody2D:
   serializedVersion: 4
@@ -212,3 +213,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54c12052679ed0244bd7fddcb44f44f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wizard: {fileID: 0}
+  fairy: {fileID: 1281802095884592762}

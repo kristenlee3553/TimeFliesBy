@@ -13,6 +13,11 @@ public class WizardMovement : MonoBehaviour
     private bool isFacingRight = true;
 
     /// <summary>
+    /// When set to true, will not listen for wizard key input
+    /// </summary>
+    public bool noInputWizard = false;
+
+    /// <summary>
     /// True if wizard is on ground layer
     /// </summary>
     private bool isGrounded;
@@ -99,8 +104,8 @@ public class WizardMovement : MonoBehaviour
     private Vector2 slopeNormalPerp;
 
     // Script that manages death
-    private Death deathScript;
-    private bool dead = false;
+    private ResetManager resetManager;
+    public bool dead = false;
 
     private IInteractable interactObject;
 
@@ -109,7 +114,7 @@ public class WizardMovement : MonoBehaviour
         // Initiate Variables
         collider = GetComponent<BoxCollider2D>();
         rbWizard = GetComponent<Rigidbody2D>();
-        deathScript = GetComponent<Death>();
+        resetManager = GetComponent<ResetManager>();
 
         colliderSize = collider.size;
     }
@@ -117,78 +122,83 @@ public class WizardMovement : MonoBehaviour
     // Called once per frame
     void Update()
     {
-        // Update if wizard is being frozen
-        isFrozen = PreserveManager.IsPreservingWizard();
-
-        // --------------------- Movement Input ---------------------------
-        
-        if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
+        if (!noInputWizard)
         {
-            wizardMovement = -1.0f;
-        }
+            // Update if wizard is being frozen
+            isFrozen = PreserveManager.IsPreservingWizard();
 
-        else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
-        {
-            wizardMovement = 0.0f;
-        }
+            // --------------------- Movement Input ---------------------------
 
-        if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
-        {
-            wizardMovement = 1.0f;
-        }
+            if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
+            {
+                wizardMovement = -1.0f;
+            }
 
-        else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
-        {
-            wizardMovement = 0.0f;
-        }
+            else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
+            {
+                wizardMovement = 0.0f;
+            }
 
-        // Handles jumping
-        if (Input.GetKeyDown(GameManager.s_keyBinds[GameManager.KeyBind.WizardJump]) && !isFrozen)
-        {
-            Jump();
-        }
+            if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
+            {
+                wizardMovement = 1.0f;
+            }
 
-        if (isFrozen)
-        {
-            wizardMovement = 0.0f;
-            rbWizard.velocity = Vector2.zero;
-        }
+            else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
+            {
+                wizardMovement = 0.0f;
+            }
 
-        Flip();
+            // Handles jumping
+            if (Input.GetKeyDown(GameManager.s_keyBinds[GameManager.KeyBind.WizardJump]) && !isFrozen)
+            {
+                Jump();
+            }
 
-        // Boundaries
-        if (transform.position.x < GameManager.s_boundaryLeft)
-        {
-            Vector3 newPos = new(GameManager.s_boundaryLeft, transform.position.y, transform.position.z);
-            transform.position = newPos;
-        }
-        else if (transform.position.x > GameManager.s_boundaryRight)
-        {
-            Vector3 newPos = new(GameManager.s_boundaryRight, transform.position.y, transform.position.z);
-            transform.position = newPos;
-        }
+            if (isFrozen)
+            {
+                wizardMovement = 0.0f;
+                rbWizard.velocity = Vector2.zero;
+            }
 
-        // Interactable objects
-        if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
-        {
-            interactObject.Interact();
-        }
+            Flip();
 
+            // Boundaries
+            if (transform.position.x < GameManager.s_boundaryLeft)
+            {
+                Vector3 newPos = new(GameManager.s_boundaryLeft, transform.position.y, transform.position.z);
+                transform.position = newPos;
+            }
+            else if (transform.position.x > GameManager.s_boundaryRight)
+            {
+                Vector3 newPos = new(GameManager.s_boundaryRight, transform.position.y, transform.position.z);
+                transform.position = newPos;
+            }
+
+            // Interactable objects
+            if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
+            {
+                interactObject.Interact();
+            }
+        }
     }
 
     // Called 50 times per second
     private void FixedUpdate()
     {
-        CheckGrounded();
+        if (!noInputWizard)
+        {
+            CheckGrounded();
 
-        if (!dead)
-        {
-            SlopeCheck();
-            ApplyMovement();
-        }
-        else
-        {
-            deathScript.Die();
+            if (!dead)
+            {
+                SlopeCheck();
+                ApplyMovement();
+            }
+            else
+            {
+                resetManager.ResetLevel(false);
+            }
         }
     }
 
@@ -209,7 +219,7 @@ public class WizardMovement : MonoBehaviour
             canJump = true;
         }
 
-        if (isGrounded && rbWizard.velocity.y < maxYVelocity)
+        if (isGrounded && rbWizard.velocity.y < maxYVelocity && !noInputWizard)
         {
             dead = true;
         }
@@ -363,5 +373,19 @@ public class WizardMovement : MonoBehaviour
             interactObject = null;
             interactableObject.RemoveInteractable();
         }
+    }
+
+    /// <summary>
+    /// Resets wizard everything
+    /// </summary>
+    public void ResetWizard()
+    {
+        dead = false;
+        isGrounded = true;
+        isOnSlope = false;
+        isJumping = false;
+        wizardMovement = 0.0f;
+        isFrozen = false;
+        rbWizard.velocity = Vector2.zero;
     }
 }

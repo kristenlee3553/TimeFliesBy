@@ -21,6 +21,10 @@ public class GameUIHandler : MonoBehaviour
 
     private VisualElement m_menuButton;
 
+    [SerializeField] GameObject wizard;
+
+    private ResetManager resetManager;
+
     /// <summary>
     /// So that other classes can call methods here using the class name
     /// </summary>
@@ -41,6 +45,8 @@ public class GameUIHandler : MonoBehaviour
         m_menuButton = uiDocument.rootVisualElement.Q<VisualElement>("MenuButton");
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
 
+        resetManager = wizard.GetComponent<ResetManager>();
+
         m_resetButton.RegisterCallback<ClickEvent>(ResetEvent);
         m_menuButton.RegisterCallback<ClickEvent>(MenuEvent);
 
@@ -50,92 +56,12 @@ public class GameUIHandler : MonoBehaviour
 
     private void ResetEvent(ClickEvent evt)
     {
-        StartCoroutine(UnloadScene());
-        StartCoroutine(ResetGame());
+        resetManager.ResetLevel(true);
     }
 
     private void MenuEvent(ClickEvent evt)
     {
         Debug.Log("Menu Clicked");
-    }
-
-    IEnumerator UnloadScene()
-    {
-        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(GameManager.s_currentScene); ;
-
-        // Wait until scene is loaded
-        while (!asyncUnload.isDone)
-        {
-            yield return null;
-        }
-    }
-
-    IEnumerator ResetGame()
-    {
-        // Load new scene
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + 1, LoadSceneMode.Additive);
-
-        // Wait until scene is loaded
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-
-        // Move wizard to start point
-        GameObject wizard = GameObject.FindWithTag("Wizard");
-
-        if (wizard != null)
-        {
-            wizard.GetComponent<SpriteRenderer>().color = Color.white;
-            wizard.transform.position = new Vector3(GameManager.s_wizardResetX, GameManager.s_wizardResetY, wizard.transform.position.z);
-
-        }
-
-        // Move fairy to respawn point
-        GameObject fairy = GameObject.FindWithTag("Fairy");
-
-        if (fairy != null)
-        {
-            fairy.GetComponent<SpriteRenderer>().color = Color.white;
-            fairy.transform.position = new Vector3(GameManager.s_fairyResetX, GameManager.s_fairyResetY, fairy.transform.position.z);
-        }
-
-        // Orbs
-        GameManager.s_curOrbs[0] = false;
-        GameManager.s_curOrbs[1] = false;
-        GameManager.s_curOrbs[2] = false;
-
-        CollectableOrbs[] orbs = FindObjectsByType<CollectableOrbs>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-
-        for (int x = 0; x < orbs.Length; x++)
-        {
-            orbs[x].gameObject.SetActive(true);
-        }
-
-
-        // Reset all preserving variables
-        PreserveManager.SetPreservableObject(null);
-        PreserveManager.SetPreservedObject(null);
-        PreserveManager.SetPreservingWizard(false);
-
-        // Level specific code
-        if (GameManager.s_level == "Dino")
-        {
-            GameObject nest = GameObject.FindGameObjectWithTag("Nest");
-
-            if (nest != null)
-            {
-                nest.SetActive(false);
-            }
-        }
-
-        GameManager.s_currentScene = GameManager.s_level + 1;
-        GameManager.s_phase = 1;
-
-        // UI
-        SetPhase(1);
-        SetOrbCounter();
-
     }
 
     /// <summary>

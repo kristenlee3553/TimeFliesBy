@@ -297,11 +297,117 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4024885180696895795, guid: d24770125535e3c4398099857f9e7767, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8724785751317388745, guid: d24770125535e3c4398099857f9e7767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1871811146}
   m_SourcePrefab: {fileID: 100100000, guid: d24770125535e3c4398099857f9e7767, type: 3}
+--- !u!1 &1871811145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8724785751317388745, guid: d24770125535e3c4398099857f9e7767, type: 3}
+  m_PrefabInstance: {fileID: 1871811144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &1871811146
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871811145}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.66, y: 1.44}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.56, y: -0.35999998}
+      - {x: 1.64, y: -0.29999998}
+      - {x: 1.63, y: -0.17999999}
+      - {x: 1.7099999, y: -0.17999999}
+      - {x: 1.75, y: -0.14999999}
+      - {x: 1.75, y: -0.099999994}
+      - {x: 1.66, y: 0.06}
+      - {x: 1.65, y: 0.28}
+      - {x: 1.63, y: 0.32999998}
+      - {x: 1.5799999, y: 0.38}
+      - {x: 1.4499999, y: 0.42}
+      - {x: 1.35, y: 0.44}
+      - {x: 1.2099999, y: 0.44}
+      - {x: 1, y: 0.41}
+      - {x: 0.19999999, y: 0.42999998}
+      - {x: -0.01, y: 0.42}
+      - {x: -0.53, y: 0.38}
+      - {x: -1.06, y: 0.39}
+      - {x: -1.41, y: 0.42999998}
+      - {x: -1.48, y: 0.42}
+      - {x: -1.52, y: 0.41}
+      - {x: -1.5999999, y: 0.26}
+      - {x: -1.76, y: 0.16}
+      - {x: -1.78, y: 0.13}
+      - {x: -1.78, y: 0.07}
+      - {x: -1.67, y: -0.02}
+      - {x: -1.5899999, y: -0.17}
+      - {x: -1.66, y: -0.22}
+      - {x: -1.62, y: -0.31}
+      - {x: -1.4599999, y: -0.38}
+      - {x: -1.29, y: -0.35999998}
+      - {x: -1.17, y: -0.52}
+      - {x: -1.12, y: -0.51}
+      - {x: -1.06, y: -0.45}
+      - {x: -0.81, y: -0.38}
+      - {x: -0.61, y: -0.35}
+      - {x: -0.45, y: -0.35999998}
+      - {x: -0.21, y: -0.34}
+      - {x: 0.02, y: -0.32}
+      - {x: 0.08, y: -0.38}
+      - {x: 0.14, y: -0.52}
+      - {x: 0.19, y: -0.53}
+      - {x: 0.24, y: -0.42999998}
+      - {x: 0.39, y: -0.41}
+      - {x: 0.53999996, y: -0.34}
+      - {x: 0.62, y: -0.41}
+      - {x: 0.71, y: -0.61}
+      - {x: 0.77, y: -0.61}
+      - {x: 0.82, y: -0.59999996}
+      - {x: 0.88, y: -0.45}
+      - {x: 1.0699999, y: -0.39}
+      - {x: 1.42, y: -0.39}
+  m_UseDelaunayMesh: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
