@@ -7,8 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        // Change later to load save slots instead
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Saves");
     }
 
     public void LoadSettings()
