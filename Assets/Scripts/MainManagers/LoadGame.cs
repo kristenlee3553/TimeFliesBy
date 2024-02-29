@@ -12,7 +12,7 @@ public class LoadGame : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive); // Background
+        //SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive); // Background
         //SceneManager.LoadScene("GameScene", LoadSceneMode.Additive); // Characters
 
         // Set up key bindings

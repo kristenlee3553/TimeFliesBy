@@ -11,11 +11,13 @@ public class ChangeTime : MonoBehaviour
     // Script that manages reseting of level
     private ResetManager resetManager;
     private FairyMovement fairyMove;
+    private Animator animator;
 
     private void Start()
     {
         fairyMove = GetComponent<FairyMovement>();
         resetManager = GetComponent<ResetManager>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,13 @@ public class ChangeTime : MonoBehaviour
                 {
                     GameManager.s_phase--;
                     resetManager.ChangePhase();
+
+                    if (!PreserveManager.IsPreserving())
+                    {
+                        animator.SetTrigger("Power");
+                    }
+                    
+                    
                 }
 
             }
@@ -44,6 +53,10 @@ public class ChangeTime : MonoBehaviour
                 {
                     GameManager.s_phase++;
                     resetManager.ChangePhase();
+                    if (!PreserveManager.IsPreserving())
+                    {
+                        animator.SetTrigger("Power");
+                    }
                 }
             }
         }

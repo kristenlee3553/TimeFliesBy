@@ -2,15 +2,16 @@ using UnityEngine;
 
 /// <summary>
 /// Script that allows the fairy to freeze an object
-/// NEED TO ADD ANIMATION
 /// </summary>
 public class FreezeObject : MonoBehaviour
 {
     private FairyMovement fairyMove;
+    private Animator animator;
 
     private void Start()
     {
         fairyMove = GetComponent<FairyMovement>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class FreezeObject : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.IsPreserving())
             {
                 // Stop animation
-                GetComponent<SpriteRenderer>().color = Color.white; //FILLER CODE
+                animator.SetBool("Holding", false);
 
                 // Wizard specific
                 if (PreserveManager.GetPreservedObject().CompareTag("Wizard"))
@@ -44,7 +45,7 @@ public class FreezeObject : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.CanPreserve())
             {
                 // Set hold animation
-                GetComponent<SpriteRenderer>().color = Color.magenta; //FILLER CODE
+                animator.SetBool("Holding", true);
 
                 // Wizard specific
                 if (PreserveManager.GetPreservableObject().CompareTag("Wizard"))

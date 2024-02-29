@@ -14,6 +14,17 @@ public class FairyMovement : MonoBehaviour
     /// </summary>
     public bool noInputFairy = false;
 
+    private SpriteRenderer sprite;
+    private Animator animator;
+
+    bool isFacingRight = false;
+
+    private void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+    }
+
     // Called once per frame
     void Update()
     {
@@ -65,6 +76,8 @@ public class FairyMovement : MonoBehaviour
                 Vector3 newPos = new(transform.position.x, GameManager.s_boundaryDown, transform.position.z);
                 transform.position = newPos;
             }
+
+            Flip();
         }
     }
 
@@ -78,8 +91,19 @@ public class FairyMovement : MonoBehaviour
         }
     }
 
+    private void Flip()
+    {
+        if (isFacingRight && fairyMovement.Equals(Vector2.left) || !isFacingRight && fairyMovement.Equals(Vector2.right))
+        {
+            isFacingRight = !isFacingRight;
+            sprite.flipX = !sprite.flipX;
+        }
+    }
+
     public void resetFairy()
     {
         rbFairy.velocity = Vector2.zero;
+        animator.SetBool("holding", false);
+        
     }
 }

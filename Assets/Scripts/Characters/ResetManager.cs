@@ -15,12 +15,12 @@ public class ResetManager : MonoBehaviour
     private FairyMovement fairyMove;
     private SpriteRenderer wizardSpriteRenderer;
     private SpriteRenderer fairySpriteRenderer;
-    private BoxCollider2D col;
+    private CapsuleCollider2D col;
 
     private void Start()
     {
         rb = wizard.GetComponent<Rigidbody2D>();
-        col = wizard.GetComponent<BoxCollider2D>();
+        col = wizard.GetComponent<CapsuleCollider2D>();
 
         wizardMove = wizard.GetComponent<WizardMovement>();
         fairyMove = fairy.GetComponent<FairyMovement>();
@@ -98,11 +98,22 @@ public class ResetManager : MonoBehaviour
         // UI Bar
         GameUIHandler.Instance.SetPhase(GameManager.s_phase);
 
+        // Check wizard collision
+        GameManager.s_sceneChange = true;
+
+        // Delay -> allow objects to check their colliders
+        yield return new WaitForSeconds(0.15f);
+
         // Game Over
-        if (GameManager.s_onMoveableObject)
+        if (GameManager.s_onDeathObject)
         {
             ResetLevel(false);
         }
+
+        // Turn off wizard collision
+        GameManager.s_sceneChange = false;
+
+        yield return null;
     }
 
     /// <summary>

@@ -65,7 +65,8 @@ public static class GameManager
     public static float s_wizardRespawnY = 1.07f;
 
     // --------------- Game Over Variables -------------------
-    public static bool s_onMoveableObject = false;
+    public static bool s_onDeathObject = false;
+    public static bool s_sceneChange = false;
 
 
     // --------------- Key Bindings -----------------------
@@ -113,4 +114,5 @@ public static class GameManager
 
     // ------------------ Wizard Interactables ------------------------
     public static Color s_interactColor = Color.cyan;
+    
 }

@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 9215512317033477164}
   - component: {fileID: 2070302382181834376}
   - component: {fileID: -1001207819034029072}
-  - component: {fileID: -8365036579449686297}
-  - component: {fileID: -3149928538735178969}
+  - component: {fileID: 6075362759433622044}
   m_Layer: 6
   m_Name: Dino1
   m_TagString: Dino
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7967529829077098348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0.265, y: -0.452, z: 0}
   m_LocalScale: {x: 0.6270718, y: 0.38379344, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -99,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b41b801ef0ad409171ea4dcebcf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!60 &-8365036579449686297
-PolygonCollider2D:
+--- !u!68 &6075362759433622044
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,56 +131,44 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.8899994, y: 4.450429}
-    newSize: {x: 2.56, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_EdgeRadius: 0
   m_Points:
-    m_Paths:
-    - - {x: 2.4606712, y: -1.9773144}
-      - {x: 2.8110814, y: -1.9022264}
-      - {x: 3.0113158, y: -1.77708}
-      - {x: 3.3116674, y: -1.5017577}
-      - {x: 3.461843, y: -1.2014062}
-      - {x: 3.4868724, y: -1.0262011}
-      - {x: 3.4868724, y: -0.37543944}
-      - {x: 3.4117846, y: -0.050058592}
-      - {x: 3.111433, y: 0.5506445}
-      - {x: 2.9612572, y: 0.7508789}
-      - {x: 2.4606712, y: 1.2014062}
-      - {x: 2.2354076, y: 1.3515819}
-      - {x: 1.5345874, y: 1.7019922}
-      - {x: 0.9338842, y: 1.852168}
-      - {x: 0.65856194, y: 1.9022264}
-      - {x: -0.11734621, y: 1.9022264}
-      - {x: -0.49278566, y: 1.8771971}
-      - {x: -1.2186352, y: 1.7019922}
-      - {x: -1.8193383, y: 1.4016405}
-      - {x: -2.2698658, y: 1.1263183}
-      - {x: -2.8205101, y: 0.5256152}
-      - {x: -3.145891, y: -0.025029296}
-      - {x: -3.4212134, y: -0.5756738}
-      - {x: -3.4462426, y: -0.72584957}
-      - {x: -3.4462426, y: -1.2514648}
-      - {x: -3.2960668, y: -1.5518163}
-      - {x: -2.9206274, y: -1.8771971}
-      - {x: -2.7454224, y: -1.9022264}
-      - {x: -2.4701, y: -1.9773144}
-  m_UseDelaunayMesh: 0
---- !u!114 &-3149928538735178969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7967529829077098348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16878483ceea4ca4fa187caa93bdb4a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  - {x: -2.088393, y: -1.9715841}
+  - {x: -2.643207, y: -1.9413719}
+  - {x: -2.993117, y: -1.8083483}
+  - {x: -3.4184964, y: -1.363495}
+  - {x: -3.454552, y: -1.0950207}
+  - {x: -3.4565954, y: -0.98353416}
+  - {x: -3.4510272, y: -0.78609425}
+  - {x: -3.424462, y: -0.6585069}
+  - {x: -3.2972317, y: -0.33048806}
+  - {x: -2.809089, y: 0.5180114}
+  - {x: -2.4848797, y: 0.89284956}
+  - {x: -2.4296987, y: 0.96079624}
+  - {x: -2.092432, y: 1.22279}
+  - {x: -1.6948789, y: 1.462066}
+  - {x: -1.4845653, y: 1.5564309}
+  - {x: -1.1905072, y: 1.6787024}
+  - {x: -1.0854903, y: 1.7190676}
+  - {x: -1.009846, y: 1.7348877}
+  - {x: -0.89581895, y: 1.7643334}
+  - {x: -0.6891396, y: 1.812743}
+  - {x: -0.5993079, y: 1.8233439}
+  - {x: -0.5360824, y: 1.8433222}
+  - {x: -0.39682564, y: 1.8692113}
+  - {x: -0.31873554, y: 1.8891907}
+  - {x: 0.8377044, y: 1.8917065}
+  - {x: 1.7784091, y: 1.5904474}
+  - {x: 2.763743, y: 0.9239766}
+  - {x: 3.304372, y: 0.17595705}
+  - {x: 3.4782631, y: -0.57923377}
+  - {x: 3.4689186, y: -0.9797432}
+  - {x: 3.3466396, y: -1.4230018}
+  - {x: 3.0137007, y: -1.7544008}
+  - {x: 2.7046626, y: -1.8971267}
+  - {x: 2.295582, y: -1.976413}
+  - {x: -2.1391344, y: -1.961798}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

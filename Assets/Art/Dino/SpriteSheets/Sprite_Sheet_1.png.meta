@@ -118,7 +118,7 @@ TextureImporter:
         width: 366
         height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +139,7 @@ TextureImporter:
         width: 242
         height: 346
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
         width: 592
         height: 408
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 140
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,6 +189,48 @@ TextureImporter:
       bones: []
       spriteID: a09cbacf5edad9447b06f24ba5bce02a
       internalID: -16327226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard2
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 183
+        width: 188
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f49ebfd3b25aa248a50ad5e7cdbbbd2
+      internalID: 1786640750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fairy2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 319
+        width: 227
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85e819f7b05ddae4489fc8cd975500d3
+      internalID: 964160078
       vertices: []
       indices: 
       edges: []
@@ -204,10 +246,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Fairy2: 964160078
       Falling_Rock: 601161926
       Orb: -16327226
       Portal: -357048702
+      Sprite_Sheet_1_1: -1405549523
+      Sprite_Sheet_1_2: -1384137465
+      Sprite_Sheet_1_4: -1902501208
+      Sprite_Sheet_1_5: 941718697
+      Sprite_Sheet_1_6: -369435437
+      Sprite_Sheet_1_7: -1368992523
       Tree: 1831203616
+      Wizard2: 1786640750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
