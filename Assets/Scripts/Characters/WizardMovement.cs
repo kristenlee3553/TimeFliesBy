@@ -13,11 +13,6 @@ public class WizardMovement : MonoBehaviour
     private bool isFacingRight = true;
 
     /// <summary>
-    /// When set to true, will not listen for wizard key input
-    /// </summary>
-    public bool noInputWizard = false;
-
-    /// <summary>
     /// True if wizard is on ground layer
     /// </summary>
     private bool isGrounded;
@@ -31,21 +26,6 @@ public class WizardMovement : MonoBehaviour
     /// True if wizard is falling
     /// </summary>
     private bool isFalling;
-
-    /// <summary>
-    /// Max speed wizard can fall before dying
-    /// </summary>
-    //private readonly float maxYVelocity = -7.036598f;
-    private readonly float maxYVelocity = -100f;
-
-    /// <summary>
-    /// True if fairy is freezing wizard
-    /// </summary>
-    bool isFrozen;
-
-    // Component variables
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
 
     // ----------------------- Slope Stuff -----------------------
 
@@ -99,6 +79,9 @@ public class WizardMovement : MonoBehaviour
     private Rigidbody2D rbWizard;
     private Vector2 colliderSize;
     Animator animator;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform headCheck;
 
     // --------------- Physics ------------------------
     [SerializeField]
@@ -111,10 +94,34 @@ public class WizardMovement : MonoBehaviour
     /// </summary>
     private Vector2 slopeNormalPerp;
 
-    // Script that manages death
-    private ResetManager resetManager;
+    // ------------- Fall Damage ------------
+
+    /// <summary>
+    /// Position of the object the wizard was last at
+    /// </summary>
+    private float lastY;
+
+    /// <summary>
+    /// Max distance wizard can fall before dying from fall damage
+    /// </summary>
+    private readonly float maxFallDistance = 3.5f;
+
     private bool dead = false;
 
+    // ------------- Other ------------
+    /// <summary>
+    /// True if fairy is freezing wizard
+    /// </summary>
+    bool isFrozen;
+
+    /// <summary>
+    /// When set to true, wizard won't be able to move or interact
+    /// </summary>
+    private bool disableInput = false;
+
+    /// <summary>
+    /// Holds the object the wizard can interact with
+    /// </summary>
     private IInteractable interactObject;
 
     private void Start()
@@ -122,24 +129,24 @@ public class WizardMovement : MonoBehaviour
         // Initiate Variables
         collider = GetComponent<CapsuleCollider2D>();
         rbWizard = GetComponent<Rigidbody2D>();
-        resetManager = GetComponent<ResetManager>();
         animator = GetComponent<Animator>();
 
         colliderSize = collider.size;
+
+        lastY = groundCheck.position.y;
     }
 
     // Called once per frame
     void Update()
     {
-        if (!noInputWizard)
+        if (!disableInput)
         {
             // Update if wizard is being frozen
-            isFrozen = PreserveManager.IsPreservingWizard();
+            isFrozen = PreserveManager.Instance.IsPreservingWizard();
 
             isFalling = rbWizard.velocity.y < -0.1f;
 
             CheckInput();
-
             CheckMaterial();
 
             if (isFrozen)
@@ -162,18 +169,19 @@ public class WizardMovement : MonoBehaviour
     // Called 50 times per second
     private void FixedUpdate()
     {
-        if (!noInputWizard)
+        if (!disableInput)
         {
             CheckGrounded();
+            CheckFallDamage();
 
-            if (!dead)
+            if (dead)
             {
-                SlopeCheck();
-                ApplyMovement();
+                ResetManager.Instance.ResetLevel(false);
             }
             else
             {
-                resetManager.ResetLevel(false);
+                SlopeCheck();
+                ApplyMovement();
             }
         }
     }
@@ -265,12 +273,19 @@ public class WizardMovement : MonoBehaviour
             animator.SetBool("isJumping", false);
         }
 
-        if (isGrounded && rbWizard.velocity.y < maxYVelocity && !noInputWizard)
+    }
+
+    private void CheckFallDamage()
+    {
+        if (isGrounded)
         {
-            dead = true;
-        }
-        else {
-            dead = false;
+            // Check if dead from fall damage
+            if (Mathf.Abs(lastY - groundCheck.position.y) > maxFallDistance)
+            {
+                dead = true;
+            }
+
+            lastY = groundCheck.position.y;
         }
     }
 
@@ -421,6 +436,11 @@ public class WizardMovement : MonoBehaviour
         }
     }
 
+    public void DisableInput(bool disable)
+    {
+        disableInput = disable;
+    }
+
     /// <summary>
     /// Resets wizard everything
     /// </summary>
@@ -433,5 +453,6 @@ public class WizardMovement : MonoBehaviour
         wizardMovement = 0.0f;
         isFrozen = false;
         rbWizard.velocity = Vector2.zero;
+        lastY = groundCheck.position.y; // Probably will cause some bugs
     }
 }

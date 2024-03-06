@@ -11,9 +11,14 @@ public static class GameManager
     // -------------- Level Variables -----------------
 
     /// <summary>
-    /// Level Phase
+    /// Current Level Phase
     /// </summary>
-    public static int s_phase = 1;
+    public static int s_curPhase = 1;
+
+    /// <summary>
+    /// Next Phase to load
+    /// </summary>
+    public static int s_nextPhase = 2;
 
     /// <summary>
     /// Name of the level, not including phase number
@@ -23,12 +28,27 @@ public static class GameManager
     /// <summary>
     /// Name of the scene that is loaded. Often GameManager.Level + GameManager.Phase
     /// </summary>
-    public static string s_currentScene = "Dino1";
+    public static string s_curScene = "Dino1";
 
     /// <summary>
-    /// Name of the scene when checkpoint is reached
+    /// Name of the last scene that is loaded. Needed for time movement logic
+    /// </summary>
+    public static string s_lastScene = "Dino1";
+
+    /// <summary>
+    /// Probably will delete later. Tells if game screen is on a level not on a UI screen.
+    /// </summary>
+    public static bool s_onGameLevel = true;
+
+    /// <summary>
+    /// Phase when checkpoint is reached
     /// </summary>
     public static int s_checkpointPhase = 1;
+
+    /// <summary>
+    /// First phase when level loads. Usually 1, some levels may start in the middle.
+    /// </summary>
+    public static int s_firstPhase = 1;
 
     // -------------- Starting Positions ---------------------
 
@@ -55,12 +75,12 @@ public static class GameManager
     // -------------- Respawn Point ---------------------
 
     /// <summary>
-    /// Wizard's Respawn x position
+    /// Wizard's Respawn x position. For checkpoint
     /// </summary>
     public static float s_wizardRespawnX = -7.53f;
 
     /// <summary>
-    /// Wizard's Respawn y position
+    /// Wizard's Respawn y position. For checkpoints
     /// </summary>
     public static float s_wizardRespawnY = 1.07f;
 

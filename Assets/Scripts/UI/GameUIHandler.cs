@@ -23,8 +23,6 @@ public class GameUIHandler : MonoBehaviour
 
     [SerializeField] GameObject wizard;
 
-    private ResetManager resetManager;
-
     /// <summary>
     /// So that other classes can call methods here using the class name
     /// </summary>
@@ -33,6 +31,13 @@ public class GameUIHandler : MonoBehaviour
     // Awake is called when the script instance is being loaded (in this situation, when the game scene loads)
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
         Instance = this;
     }
 
@@ -45,18 +50,16 @@ public class GameUIHandler : MonoBehaviour
         m_menuButton = uiDocument.rootVisualElement.Q<VisualElement>("MenuButton");
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
 
-        resetManager = wizard.GetComponent<ResetManager>();
-
         m_resetButton.RegisterCallback<ClickEvent>(ResetEvent);
         m_menuButton.RegisterCallback<ClickEvent>(MenuEvent);
 
-        SetPhase(1);
+        SetPhase(GameManager.s_firstPhase);
         SetOrbCounter();
     }
 
     private void ResetEvent(ClickEvent evt)
     {
-        resetManager.ResetLevel(true);
+        ResetManager.Instance.ResetLevel(true);
     }
 
     private void MenuEvent(ClickEvent evt)

@@ -10,39 +10,49 @@ public class PreserveManager : MonoBehaviour
     /// <summary>
     ///  Holds the object that is near the fairy that can be preserved
     /// </summary>
-    private static GameObject preservableObject = null;
+    private GameObject preservableObject = null;
 
     /// <summary>
     /// Object fairy is preserving
     /// </summary>
-    private static GameObject preservedObject = null;
+    private GameObject preservedObject = null;
 
     /// <summary>
     /// If wizard is frozen
     /// </summary>
-    private static bool isPreservingWizard = false;
+    private bool isPreservingWizard = false;
 
     /// <summary>
     /// Original color of sprite
     /// </summary>
-    private static Color startcolor;
+    private Color startcolor;
 
     /// <summary>
     /// Color when highlighting a sprite
     /// </summary>
-    public static readonly Color highlightColor = Color.yellow;
+    public readonly Color highlightColor = Color.yellow;
+
+    public static PreserveManager Instance { get; private set; }
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
+        Instance = this;
         // Script will last between scenes
-        DontDestroyOnLoad(transform.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
     /// Returns if the fairy can preserve an object
     /// </summary>
     /// <returns></returns>
-    public static bool CanPreserve()
+    public bool CanPreserve()
     {
         return preservableObject != null;
     }
@@ -51,7 +61,7 @@ public class PreserveManager : MonoBehaviour
     /// Returns if the fairy is preserving an object
     /// </summary>
     /// <returns></returns>
-    public static bool IsPreserving()
+    public bool IsPreserving()
     {
         return preservedObject != null;
     }
@@ -60,7 +70,7 @@ public class PreserveManager : MonoBehaviour
     /// Returns true if preserved object is wizard
     /// </summary>
     /// <returns></returns>
-    public static bool IsPreservingWizard()
+    public bool IsPreservingWizard()
     {
         return isPreservingWizard;
     }
@@ -69,7 +79,7 @@ public class PreserveManager : MonoBehaviour
     /// Set if the wizard is being preserved
     /// </summary>
     /// <param name="isFrozen"></param>
-    public static void SetPreservingWizard(bool isFrozen)
+    public void SetPreservingWizard(bool isFrozen)
     {
         isPreservingWizard = isFrozen;
     }
@@ -78,7 +88,7 @@ public class PreserveManager : MonoBehaviour
     /// Set object fairy COULD preserve right now
     /// </summary>
     /// <param name="new_object"></param>
-    public static void SetPreservableObject(GameObject newObject)
+    public void SetPreservableObject(GameObject newObject)
     {
         preservableObject = newObject;
     }
@@ -87,7 +97,7 @@ public class PreserveManager : MonoBehaviour
     /// Returns object fairy could be preserving
     /// </summary>
     /// <returns></returns>
-    public static GameObject GetPreservableObject()
+    public GameObject GetPreservableObject()
     {
         return preservableObject;
     }
@@ -96,7 +106,7 @@ public class PreserveManager : MonoBehaviour
     /// Sets object fairy is currently preserving
     /// </summary>
     /// <param name="new_object"></param>
-    public static void SetPreservedObject(GameObject newobject)
+    public void SetPreservedObject(GameObject newobject)
     {
         preservedObject = newobject;
     }
@@ -105,7 +115,7 @@ public class PreserveManager : MonoBehaviour
     /// Returns object fairy is preserving
     /// </summary>
     /// <returns></returns>
-    public static GameObject GetPreservedObject()
+    public GameObject GetPreservedObject()
     {
         return preservedObject;
     }
@@ -114,7 +124,7 @@ public class PreserveManager : MonoBehaviour
     /// Stores previous color of sprite before highlighting
     /// </summary>
     /// <param name="newColor"></param>
-    public static void SetStartColor(Color newColor)
+    public void SetStartColor(Color newColor)
     {
         startcolor = newColor;
     }
@@ -123,7 +133,7 @@ public class PreserveManager : MonoBehaviour
     /// Returns previous color of sprite before highlighting
     /// </summary>
     /// <returns></returns>
-    public static Color GetStartColor()
+    public Color GetStartColor()
     {
         return startcolor;
     }

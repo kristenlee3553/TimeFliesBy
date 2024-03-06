@@ -38,7 +38,7 @@ public class LoadGame : MonoBehaviour
 
     IEnumerator SetUpLevel()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_phase.ToString(), LoadSceneMode.Additive); // Phase 1
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
         // Wait until scene is loaded
         while (!asyncLoad.isDone)

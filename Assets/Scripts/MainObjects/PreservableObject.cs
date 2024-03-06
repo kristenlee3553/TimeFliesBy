@@ -12,11 +12,11 @@ public class Preserve : MonoBehaviour
         if (collision.CompareTag("Fairy"))
         {
             // Change color
-            PreserveManager.SetStartColor(this.GetComponent<SpriteRenderer>().color);
-            this.GetComponent<SpriteRenderer>().color = PreserveManager.highlightColor;
+            PreserveManager.Instance.SetStartColor(this.GetComponent<SpriteRenderer>().color);
+            this.GetComponent<SpriteRenderer>().color = PreserveManager.Instance.highlightColor;
 
             // Set object fairy can preserve
-            PreserveManager.SetPreservableObject(this.gameObject);
+            PreserveManager.Instance.SetPreservableObject(this.gameObject);
         }
     }
 
@@ -25,10 +25,10 @@ public class Preserve : MonoBehaviour
         if (collision.CompareTag("Fairy"))
         {
             // Revert to original color
-            this.GetComponent<SpriteRenderer>().color = PreserveManager.GetStartColor();
+            this.GetComponent<SpriteRenderer>().color = PreserveManager.Instance.GetStartColor();
 
             // No longer able to preserve an object
-            PreserveManager.SetPreservableObject(null);
+            PreserveManager.Instance.SetPreservableObject(null);
         }
     }
 }

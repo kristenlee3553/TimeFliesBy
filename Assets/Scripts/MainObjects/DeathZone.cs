@@ -11,10 +11,10 @@ public class DeathZone : MonoBehaviour
         if (GameManager.s_sceneChange && collision.gameObject.CompareTag("Wizard"))
         {   
             // Fairy is preserving an object that is not the wizard
-            if (PreserveManager.IsPreserving() && !PreserveManager.IsPreservingWizard())
+            if (PreserveManager.Instance.IsPreserving() && !PreserveManager.Instance.IsPreservingWizard())
             {
                 // If object fairy is preserving is not the object the wizard is standing on, wizard will die
-                if (!ReferenceEquals(transform.gameObject, PreserveManager.GetPreservedObject()))
+                if (!ReferenceEquals(transform.gameObject, PreserveManager.Instance.GetPreservedObject()))
                 {
                     GameManager.s_onDeathObject = true;
                 }
@@ -25,7 +25,7 @@ public class DeathZone : MonoBehaviour
                 }
             }
             // Wizard will not die if being preserved by fairy
-            else if (PreserveManager.IsPreservingWizard())
+            else if (PreserveManager.Instance.IsPreservingWizard())
             {
                 GameManager.s_onDeathObject = false;
             }
