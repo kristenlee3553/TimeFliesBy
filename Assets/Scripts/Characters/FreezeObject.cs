@@ -26,11 +26,20 @@ public class FreezeObject : MonoBehaviour
                 // Stop animation
                 animator.SetBool("Holding", false);
 
+
                 // Wizard specific
                 if (PreserveManager.Instance.GetPreservedObject().CompareTag("Wizard"))
                 {
                     PreserveManager.Instance.SetPreservingWizard(false);
                     PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
+                }
+                // Tutorial specific
+                else if (GameManager.s_level == "Tut")
+                {
+                    if (PreserveManager.Instance.GetPreservedObject().CompareTag("Apple")) {
+                        // Enable gravity
+                        PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
+                    }
                 }
 
                 // Highlight color
@@ -53,6 +62,15 @@ public class FreezeObject : MonoBehaviour
                 {
                     PreserveManager.Instance.SetPreservingWizard(true);
                     PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
+                }
+                // Tutorial specific
+                else if (GameManager.s_level == "Tut")
+                {
+                    if (PreserveManager.Instance.GetPreservableObject().CompareTag("Apple"))
+                    {
+                        // Enable gravity
+                        PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
+                    }
                 }
 
                 PreserveManager.Instance.SetPreservedObject(PreserveManager.Instance.GetPreservableObject());

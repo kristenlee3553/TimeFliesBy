@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Slope stuff: https://www.youtube.com/watch?v=QPiZSTEuZnw
@@ -15,7 +16,7 @@ public class WizardMovement : MonoBehaviour
     /// <summary>
     /// True if wizard is on ground layer
     /// </summary>
-    private bool isGrounded;
+    public bool isGrounded;
 
     /// <summary>
     /// True if wizard is currently jumping
@@ -81,7 +82,7 @@ public class WizardMovement : MonoBehaviour
     Animator animator;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform headCheck;
+    public Transform headCheck;
 
     // --------------- Physics ------------------------
     [SerializeField]
@@ -124,6 +125,8 @@ public class WizardMovement : MonoBehaviour
     /// </summary>
     private IInteractable interactObject;
 
+    private List<Collider2D> collidedObjects = new List<Collider2D>();
+
     private void Start()
     {
         // Initiate Variables
@@ -144,24 +147,33 @@ public class WizardMovement : MonoBehaviour
             // Update if wizard is being frozen
             isFrozen = PreserveManager.Instance.IsPreservingWizard();
 
-            isFalling = rbWizard.velocity.y < -0.1f;
-
-            CheckInput();
-            CheckMaterial();
-
             if (isFrozen)
             {
                 wizardMovement = 0.0f;
                 rbWizard.velocity = Vector2.zero;
+                collider.enabled = false;
+            }
+            else if (!collider.enabled)
+            {
+                collider.enabled = true;
             }
 
-            // Boundaries
-            CheckBoundaries();
-
-            // Interactable objects
-            if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
+            
+            else
             {
-                interactObject.Interact();
+                isFalling = rbWizard.velocity.y < -0.1f;
+
+                CheckInput();
+                CheckMaterial();
+
+                // Boundaries
+                CheckBoundaries();
+
+                // Interactable objects
+                if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
+                {
+                    interactObject.Interact();
+                }
             }
         }
     }
@@ -171,6 +183,8 @@ public class WizardMovement : MonoBehaviour
     {
         if (!disableInput)
         {
+            GameManager.wizardCollisions = collidedObjects.Count;
+            collidedObjects.Clear();
             CheckGrounded();
             CheckFallDamage();
 
@@ -425,6 +439,16 @@ public class WizardMovement : MonoBehaviour
             interactObject = interactableObject;
             interactableObject.ShowInteractable();
         }
+
+        if (!collidedObjects.Contains(collision))
+        {
+            collidedObjects.Add(collision);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        OnTriggerEnter2D(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -434,6 +458,20 @@ public class WizardMovement : MonoBehaviour
             interactObject = null;
             interactableObject.RemoveInteractable();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collidedObjects.Contains(collision.collider))
+        {
+            collidedObjects.Add(collision.collider);
+        }
+    }
+
+    // Also add colliders during collision stay
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        OnCollisionEnter2D(collision);
     }
 
     public void DisableInput(bool disable)

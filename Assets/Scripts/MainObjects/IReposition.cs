@@ -1,18 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class IReposition : MonoBehaviour
+/// <summary>
+/// Interface for objects that cause the wizard to reposition rather than die.
+/// Need to create new script that implemets this interface 
+/// and attach script to the object that repositions the wizard rather than kills them.
+/// See Dino2Reposition for coding template.
+/// </summary>
+public interface IReposition
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Reposition(GameObject wizard);
 }

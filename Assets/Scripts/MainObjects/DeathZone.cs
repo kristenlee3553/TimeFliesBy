@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// Attach to Moveable Objects. If wizard is touching a moveable object when time changes -> death
+/// Attach to Game Objects. If wizard is touching this object after time changes -> death
 /// </summary>
 public class DeathZone : MonoBehaviour
 {

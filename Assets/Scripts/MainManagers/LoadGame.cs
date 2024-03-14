@@ -38,6 +38,9 @@ public class LoadGame : MonoBehaviour
 
     IEnumerator SetUpLevel()
     {
+        // Uncomment this if needed
+        //GameManager.s_level = "Tut";
+        //GameManager.s_curScene = "Tut1";
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
         // Wait until scene is loaded
@@ -46,14 +49,7 @@ public class LoadGame : MonoBehaviour
             yield return null;
         }
 
-        if (GameManager.s_level == "Dino")
-        {
-            GameObject nest = GameObject.FindGameObjectWithTag("Nest");
-
-            if (nest != null)
-            {
-                nest.SetActive(false);
-            }
-        }
+        ResetManager.Instance.SetLevelRelatedObjects();
+        GameUIHandler.Instance.HideOrbDisplay();
     }
 }

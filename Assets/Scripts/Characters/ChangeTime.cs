@@ -27,13 +27,14 @@ public class ChangeTime : MonoBehaviour
                 // If not at first phase
                 if (!MinPhase())
                 {
-                    // Change scene
-                    ResetManager.Instance.ChangePhase(GameManager.s_curPhase - 1, GameManager.s_level);
 
                     if (!PreserveManager.Instance.IsPreserving())
                     {
                         animator.SetTrigger("Power");
                     }
+
+                    // Change scene
+                    ResetManager.Instance.ChangePhase(GameManager.s_curPhase - 1, GameManager.s_level);
                 }
 
             }

@@ -21,6 +21,8 @@ public class GameUIHandler : MonoBehaviour
 
     private VisualElement m_menuButton;
 
+    private UIDocument uiDocument;
+
     [SerializeField] GameObject wizard;
 
     /// <summary>
@@ -44,7 +46,7 @@ public class GameUIHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIDocument uiDocument = GetComponent<UIDocument>();
+        uiDocument = GetComponent<UIDocument>();
         m_Timebar = uiDocument.rootVisualElement.Q<VisualElement>("TimeBar");
         m_OrbContainer = uiDocument.rootVisualElement.Q<VisualElement>("OrbContainer");
         m_menuButton = uiDocument.rootVisualElement.Q<VisualElement>("MenuButton");
@@ -89,5 +91,25 @@ public class GameUIHandler : MonoBehaviour
             orb.SetEnabled(GameManager.s_curOrbs[x]);
         }
 
+    }
+
+    public void TurnOffUI()
+    {
+        uiDocument.enabled = false;
+    }
+
+    public void TurnOnUI()
+    {
+        uiDocument.enabled = true;
+    }
+
+    public void HideOrbDisplay()
+    {
+        m_OrbContainer.visible = false;
+    }
+
+    public void ShowOrbDisplay()
+    {
+        m_OrbContainer.visible = true;
     }
 }

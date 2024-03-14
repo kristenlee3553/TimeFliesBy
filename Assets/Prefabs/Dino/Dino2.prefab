@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5333344142677383991}
   - component: {fileID: 7475149088882453177}
   - component: {fileID: 8471762199065467946}
+  - component: {fileID: 1818742145288684178}
   m_Layer: 6
   m_Name: Dino2
   m_TagString: Dino
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5709587, y: 0.6340602, z: 1}
+  m_LocalScale: {x: 0.5701022, y: 0.7502835, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -148,6 +149,7 @@ EdgeCollider2D:
   - {x: -2.555012, y: 1.3341848}
   - {x: -2.2212896, y: 1.5703701}
   - {x: -1.1641186, y: 1.8157156}
+  - {x: -0.602707, y: 1.8393998}
   - {x: -0.024088115, y: 1.7777148}
   - {x: 1.0644523, y: 1.3350124}
   - {x: 2.3328197, y: 0.61289936}
@@ -174,3 +176,15 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &1818742145288684178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739720843813019898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd05da5c81b2084cafb4395b5d69f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

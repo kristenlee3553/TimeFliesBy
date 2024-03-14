@@ -33,7 +33,7 @@ public static class GameManager
     /// <summary>
     /// Name of the last scene that is loaded. Needed for time movement logic
     /// </summary>
-    public static string s_lastScene = "Dino1";
+    public static string s_lastScene = "";
 
     /// <summary>
     /// Probably will delete later. Tells if game screen is on a level not on a UI screen.
@@ -57,10 +57,14 @@ public static class GameManager
     /// </summary>
     public static float s_wizardResetX = -7.53f;
 
+    // tutorial -> -7.56f
+
     /// <summary>
     /// Wizard's starting y position
     /// </summary>
     public static float s_wizardResetY = 1.07f;
+
+    // tutorial -> -3.19f
 
     /// <summary>
     /// Fairy's starting x position
@@ -88,6 +92,17 @@ public static class GameManager
     public static bool s_onDeathObject = false;
     public static bool s_sceneChange = false;
 
+    /// <summary>
+    /// Stores gameobject that wizard is colliding with, if time WERE TO BE moved backwards or forwards. 
+    /// Stores based on phase. null if not colliding with any.
+    /// Access with s_reposition[phase num]
+    /// </summary>
+    public static IReposition[] s_reposition = {null, null, null, null, null, null };
+
+    /// <summary>
+    /// Keeps track of how many colliders the wizard is touching. 
+    /// </summary>
+    public static int wizardCollisions = 0;
 
     // --------------- Key Bindings -----------------------
 

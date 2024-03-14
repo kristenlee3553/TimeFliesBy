@@ -9,7 +9,8 @@ public class Preserve : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Fairy"))
+        if (collision.CompareTag("Fairy") && !PreserveManager.Instance.CanPreserve()
+            && !PreserveManager.Instance.IsPreserving())
         {
             // Change color
             PreserveManager.Instance.SetStartColor(this.GetComponent<SpriteRenderer>().color);
@@ -22,7 +23,9 @@ public class Preserve : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Fairy"))
+        // Sometimes the fairy is knocked away from the wizard if wizard
+        // collides on scene change which results in staying yellow
+        if (collision.CompareTag("Fairy") && !PreserveManager.Instance.IsPreserving())
         {
             // Revert to original color
             this.GetComponent<SpriteRenderer>().color = PreserveManager.Instance.GetStartColor();

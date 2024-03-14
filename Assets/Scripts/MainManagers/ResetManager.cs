@@ -97,6 +97,7 @@ public class ResetManager : MonoBehaviour
                     dup.SetActive(false);
                 }
             }
+
             // Move preserved object to scene
             SceneManager.MoveGameObjectToScene(PreserveManager.Instance.GetPreservedObject(), SceneManager.GetSceneByName(GameManager.s_curScene));
         }
@@ -112,12 +113,24 @@ public class ResetManager : MonoBehaviour
         StartCoroutine(ChangeScene(nextPhase, level));
     }
 
-    IEnumerator ChangeScene(int nextPhase, string level)
+    private IEnumerator ChangeScene(int nextPhase, string level)
     {
+        // Disable fairy powers 
+        fairyMove.DisablePower(true);
+
         // Name of next scene
         string next_scene = level + nextPhase;
         GameManager.s_lastScene = GameManager.s_curScene;
         GameManager.s_curScene = next_scene;
+
+        // Update variable
+        GameManager.s_curPhase = nextPhase;
+        
+        // Reposition wizard if needed
+        if (!PreserveManager.Instance.IsPreservingWizard())
+        {
+            yield return StartCoroutine(CheckForReposition());
+        }
 
         // Load new scene
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(next_scene, LoadSceneMode.Additive);
@@ -128,15 +141,34 @@ public class ResetManager : MonoBehaviour
             yield return null;
         }
 
-        // Remove last scene
-        SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
+        AsyncOperation asyncUnload =  SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
 
-        // Update variable
-        GameManager.s_curPhase = nextPhase;
+        // Wait until scene is unloaded
+        while (!asyncUnload.isDone)
+        {
+            yield return null;
+        }
 
         // UI Bar
         GameUIHandler.Instance.SetPhase(GameManager.s_curPhase);
 
+        // Enable fairy powers 
+        fairyMove.DisablePower(false);
+
+    }
+
+    /// <summary>
+    /// Checks if wizard needs to be repositioned during scene change 
+    /// and sets new position if have to
+    /// </summary>
+    IEnumerator CheckForReposition()
+    {
+        if (GameManager.s_reposition[GameManager.s_curPhase] != null)
+        {
+            GameManager.s_reposition[GameManager.s_curPhase].Reposition(wizard);
+        }
+
+        yield return null;
     }
 
     /// <summary>
@@ -166,10 +198,11 @@ public class ResetManager : MonoBehaviour
         // Turn off wizard collision
         GameManager.s_sceneChange = false;
 
+
         yield return null;
     }
 
-    private void SetLevelRelatedObjects()
+    public void SetLevelRelatedObjects()
     {
         // Level specific code
         if (GameManager.s_level == "Dino")
