@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Slope stuff: https://www.youtube.com/watch?v=QPiZSTEuZnw
@@ -13,14 +14,9 @@ public class WizardMovement : MonoBehaviour
     private bool isFacingRight = true;
 
     /// <summary>
-    /// When set to true, will not listen for wizard key input
-    /// </summary>
-    public bool noInputWizard = false;
-
-    /// <summary>
     /// True if wizard is on ground layer
     /// </summary>
-    private bool isGrounded;
+    public bool isGrounded;
 
     /// <summary>
     /// True if wizard is currently jumping
@@ -28,23 +24,9 @@ public class WizardMovement : MonoBehaviour
     private bool isJumping;
 
     /// <summary>
-    /// True if wizard is able to jump
+    /// True if wizard is falling
     /// </summary>
-    private bool canJump;
-
-    /// <summary>
-    /// Max speed wizard can fall before dying
-    /// </summary>
-    private readonly float maxYVelocity = -7.036598f;
-
-    /// <summary>
-    /// True if fairy is freezing wizard
-    /// </summary>
-    bool isFrozen;
-
-    // Component variables
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    private bool isFalling;
 
     // ----------------------- Slope Stuff -----------------------
 
@@ -94,91 +76,104 @@ public class WizardMovement : MonoBehaviour
     private Vector2 newForce;
 
     // ---------------- Components ---------------------
-    private BoxCollider2D collider;
+    private CapsuleCollider2D collider;
     private Rigidbody2D rbWizard;
     private Vector2 colliderSize;
+    Animator animator;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundLayer;
+    public Transform headCheck;
+
+    // --------------- Physics ------------------------
+    [SerializeField]
+    private PhysicsMaterial2D noFriction;
+    [SerializeField]
+    private PhysicsMaterial2D wizardFriction;
 
     /// <summary>
     /// Not sure
     /// </summary>
     private Vector2 slopeNormalPerp;
 
-    // Script that manages death
-    private ResetManager resetManager;
+    // ------------- Fall Damage ------------
+
+    /// <summary>
+    /// Position of the object the wizard was last at
+    /// </summary>
+    private float lastY;
+
+    /// <summary>
+    /// Max distance wizard can fall before dying from fall damage
+    /// </summary>
+    private readonly float maxFallDistance = 3.5f;
+
     private bool dead = false;
 
+    // ------------- Other ------------
+    /// <summary>
+    /// True if fairy is freezing wizard
+    /// </summary>
+    bool isFrozen;
+
+    /// <summary>
+    /// When set to true, wizard won't be able to move or interact
+    /// </summary>
+    private bool disableInput = false;
+
+    /// <summary>
+    /// Holds the object the wizard can interact with
+    /// </summary>
     private IInteractable interactObject;
+
+    private List<Collider2D> collidedObjects = new List<Collider2D>();
 
     private void Start()
     {
         // Initiate Variables
-        collider = GetComponent<BoxCollider2D>();
+        collider = GetComponent<CapsuleCollider2D>();
         rbWizard = GetComponent<Rigidbody2D>();
-        resetManager = GetComponent<ResetManager>();
+        animator = GetComponent<Animator>();
 
         colliderSize = collider.size;
+
+        lastY = groundCheck.position.y;
     }
 
     // Called once per frame
     void Update()
     {
-        if (!noInputWizard)
+        if (!disableInput)
         {
             // Update if wizard is being frozen
-            isFrozen = PreserveManager.IsPreservingWizard();
-
-            // --------------------- Movement Input ---------------------------
-
-            if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
-            {
-                wizardMovement = -1.0f;
-            }
-
-            else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
-            {
-                wizardMovement = 0.0f;
-            }
-
-            if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
-            {
-                wizardMovement = 1.0f;
-            }
-
-            else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
-            {
-                wizardMovement = 0.0f;
-            }
-
-            // Handles jumping
-            if (Input.GetKeyDown(GameManager.s_keyBinds[GameManager.KeyBind.WizardJump]) && !isFrozen)
-            {
-                Jump();
-            }
+            isFrozen = PreserveManager.Instance.IsPreservingWizard();
 
             if (isFrozen)
             {
                 wizardMovement = 0.0f;
                 rbWizard.velocity = Vector2.zero;
+                collider.enabled = false;
+            }
+            else if (!collider.enabled)
+            {
+                collider.enabled = true;
             }
 
-            Flip();
+            
+            else
+            {
+                isFalling = rbWizard.velocity.y < -0.1f;
 
-            // Boundaries
-            if (transform.position.x < GameManager.s_boundaryLeft)
-            {
-                Vector3 newPos = new(GameManager.s_boundaryLeft, transform.position.y, transform.position.z);
-                transform.position = newPos;
-            }
-            else if (transform.position.x > GameManager.s_boundaryRight)
-            {
-                Vector3 newPos = new(GameManager.s_boundaryRight, transform.position.y, transform.position.z);
-                transform.position = newPos;
-            }
+                CheckInput();
+                CheckMaterial();
 
-            // Interactable objects
-            if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
-            {
-                interactObject.Interact();
+                // Boundaries
+                CheckBoundaries();
+
+                // Interactable objects
+                if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.Interact]) && interactObject != null)
+                {
+                    interactObject.Interact();
+                }
             }
         }
     }
@@ -186,19 +181,93 @@ public class WizardMovement : MonoBehaviour
     // Called 50 times per second
     private void FixedUpdate()
     {
-        if (!noInputWizard)
+        if (!disableInput)
         {
+            GameManager.wizardCollisions = collidedObjects.Count;
+            collidedObjects.Clear();
             CheckGrounded();
+            CheckFallDamage();
 
-            if (!dead)
+            if (dead)
+            {
+                ResetManager.Instance.ResetLevel(false);
+            }
+            else
             {
                 SlopeCheck();
                 ApplyMovement();
             }
-            else
-            {
-                resetManager.ResetLevel(false);
-            }
+        }
+    }
+
+    /// <summary>
+    /// Movement Input
+    /// </summary>
+    private void CheckInput()
+    {
+        // --------------------- Movement Input ---------------------------
+
+        if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
+        {
+            wizardMovement = -1.0f;
+            Flip();
+        }
+
+        else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardLeft]))
+        {
+            wizardMovement = 0.0f;
+        }
+
+        if (Input.GetKey(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
+        {
+            wizardMovement = 1.0f;
+            Flip();
+        }
+
+        else if (Input.GetKeyUp(GameManager.s_keyBinds[GameManager.KeyBind.WizardRight]))
+        {
+            wizardMovement = 0.0f;
+        }
+
+        animator.SetFloat("speed", Mathf.Abs(wizardMovement));
+        animator.SetFloat("velocityY", Mathf.Approximately(Mathf.Abs(rbWizard.velocity.y), 0.0f)? 0.0f: rbWizard.velocity.y);
+
+        // Handles jumping
+        if (Input.GetKeyDown(GameManager.s_keyBinds[GameManager.KeyBind.WizardJump]) && !isFrozen)
+        {
+            Jump();
+        }
+    }
+
+    /// <summary>
+    /// Stops wizard from going past boundary
+    /// </summary>
+    private void CheckBoundaries()
+    {
+        if (transform.position.x < GameManager.s_boundaryLeft)
+        {
+            Vector3 newPos = new(GameManager.s_boundaryLeft, transform.position.y, transform.position.z);
+            transform.position = newPos;
+        }
+        else if (transform.position.x > GameManager.s_boundaryRight)
+        {
+            Vector3 newPos = new(GameManager.s_boundaryRight, transform.position.y, transform.position.z);
+            transform.position = newPos;
+        }
+    }
+
+    /// <summary>
+    /// Changes friction of wizard depending if on slope or falling
+    /// </summary>
+    private void CheckMaterial()
+    {
+        if (!canWalkOnSlope || isFalling)
+        {
+            rbWizard.sharedMaterial = noFriction;
+        }
+        else
+        {
+            rbWizard.sharedMaterial = wizardFriction;
         }
     }
 
@@ -208,23 +277,29 @@ public class WizardMovement : MonoBehaviour
         // Check if on ground
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
-        // If not moving -> can jump
         if (rbWizard.velocity.y == 0.0f)
         {
             isJumping = false;
         }
 
-        if (isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle)
+        if (isGrounded && !isJumping)
         {
-            canJump = true;
+            animator.SetBool("isJumping", false);
         }
 
-        if (isGrounded && rbWizard.velocity.y < maxYVelocity && !noInputWizard)
+    }
+
+    private void CheckFallDamage()
+    {
+        if (isGrounded)
         {
-            dead = true;
-        }
-        else {
-            dead = false;
+            // Check if dead from fall damage
+            if (Mathf.Abs(lastY - groundCheck.position.y) > maxFallDistance)
+            {
+                dead = true;
+            }
+
+            lastY = groundCheck.position.y;
         }
     }
 
@@ -234,7 +309,7 @@ public class WizardMovement : MonoBehaviour
     private void SlopeCheck()
     {
         // Get position at the feet of the wizard
-        Vector2 checkPos = collider.bounds.center - (Vector3)(new Vector2(0.0f, colliderSize.y / 10.02f));
+        Vector2 checkPos = collider.bounds.center - (Vector3)(new Vector2(0.0f, colliderSize.y / 9.02f));
 
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
@@ -288,7 +363,6 @@ public class WizardMovement : MonoBehaviour
             lastSlopeAngle = slopeDownAngle;
 
         }
-
         if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle)
         {
             canWalkOnSlope = false;
@@ -306,7 +380,6 @@ public class WizardMovement : MonoBehaviour
     {
         if (!isFrozen)
         {
-
             if (isGrounded && !isOnSlope && !isJumping) //if not on slope
             {
                 newVelocity.Set(movementSpeed * wizardMovement, 0.0f);
@@ -331,9 +404,11 @@ public class WizardMovement : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        if (canJump)
+        if (isGrounded && !isFalling && !isJumping && slopeDownAngle <= maxSlopeAngle)
         {
-            canJump = false;
+            animator.SetBool("isJumping", true);
+            isFalling = true;
+            isGrounded = false;
             isJumping = true;
             newVelocity.Set(0.0f, 0.0f);
             rbWizard.velocity = newVelocity;
@@ -355,7 +430,7 @@ public class WizardMovement : MonoBehaviour
         }
     }
 
-    // Interactable Objects
+    // ------------------ Interactable Objects --------------------
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -364,6 +439,16 @@ public class WizardMovement : MonoBehaviour
             interactObject = interactableObject;
             interactableObject.ShowInteractable();
         }
+
+        if (!collidedObjects.Contains(collision))
+        {
+            collidedObjects.Add(collision);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        OnTriggerEnter2D(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -373,6 +458,25 @@ public class WizardMovement : MonoBehaviour
             interactObject = null;
             interactableObject.RemoveInteractable();
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collidedObjects.Contains(collision.collider))
+        {
+            collidedObjects.Add(collision.collider);
+        }
+    }
+
+    // Also add colliders during collision stay
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        OnCollisionEnter2D(collision);
+    }
+
+    public void DisableInput(bool disable)
+    {
+        disableInput = disable;
     }
 
     /// <summary>
@@ -387,5 +491,6 @@ public class WizardMovement : MonoBehaviour
         wizardMovement = 0.0f;
         isFrozen = false;
         rbWizard.velocity = Vector2.zero;
+        lastY = groundCheck.position.y; // Probably will cause some bugs
     }
 }

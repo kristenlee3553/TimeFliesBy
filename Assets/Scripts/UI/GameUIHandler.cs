@@ -21,9 +21,9 @@ public class GameUIHandler : MonoBehaviour
 
     private VisualElement m_menuButton;
 
-    [SerializeField] GameObject wizard;
+    private UIDocument uiDocument;
 
-    private ResetManager resetManager;
+    [SerializeField] GameObject wizard;
 
     /// <summary>
     /// So that other classes can call methods here using the class name
@@ -33,30 +33,35 @@ public class GameUIHandler : MonoBehaviour
     // Awake is called when the script instance is being loaded (in this situation, when the game scene loads)
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        // end of new code
+
         Instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        UIDocument uiDocument = GetComponent<UIDocument>();
+        uiDocument = GetComponent<UIDocument>();
         m_Timebar = uiDocument.rootVisualElement.Q<VisualElement>("TimeBar");
         m_OrbContainer = uiDocument.rootVisualElement.Q<VisualElement>("OrbContainer");
         m_menuButton = uiDocument.rootVisualElement.Q<VisualElement>("MenuButton");
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
 
-        resetManager = wizard.GetComponent<ResetManager>();
-
         m_resetButton.RegisterCallback<ClickEvent>(ResetEvent);
         m_menuButton.RegisterCallback<ClickEvent>(MenuEvent);
 
-        SetPhase(1);
+        SetPhase(GameManager.s_firstPhase);
         SetOrbCounter();
     }
 
     private void ResetEvent(ClickEvent evt)
     {
-        resetManager.ResetLevel(true);
+        ResetManager.Instance.ResetLevel(true);
     }
 
     private void MenuEvent(ClickEvent evt)
@@ -86,5 +91,25 @@ public class GameUIHandler : MonoBehaviour
             orb.SetEnabled(GameManager.s_curOrbs[x]);
         }
 
+    }
+
+    public void TurnOffUI()
+    {
+        uiDocument.enabled = false;
+    }
+
+    public void TurnOnUI()
+    {
+        uiDocument.enabled = true;
+    }
+
+    public void HideOrbDisplay()
+    {
+        m_OrbContainer.visible = false;
+    }
+
+    public void ShowOrbDisplay()
+    {
+        m_OrbContainer.visible = true;
     }
 }

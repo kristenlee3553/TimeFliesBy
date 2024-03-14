@@ -134,13 +134,13 @@ TextureImporter:
       name: fairy
       rect:
         serializedVersion: 2
-        x: 233
-        y: 176
-        width: 234
-        height: 154
+        x: 225
+        y: 175
+        width: 242
+        height: 161
       alignment: 9
       pivot: {x: 0.49738333, y: 0.16203655}
-      border: {x: 0, y: 0, z: 0, w: 2}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0

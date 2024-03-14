@@ -1,70 +1,39 @@
 using UnityEngine;
 
 /// <summary>
-/// Attach to Moveable Objects. If wizard is on a moveable object when time changes -> death
+/// Attach to Game Objects. If wizard is touching this object after time changes -> death
 /// </summary>
 public class DeathZone : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wizard"))
-        {
-            // Fairy is preserving an object that is not the wizard
-            if (PreserveManager.IsPreserving() && !PreserveManager.IsPreservingWizard())
-            {
-                // If object fairy is preserving is not the object the wizard is standing on
-                if (!ReferenceEquals(transform.gameObject, PreserveManager.GetPreservedObject()))
-                {
-                    GameManager.s_onMoveableObject = true;
-                }
-                else
-                {
-                    // Wizard will not die because fairy is preserving object
-                    GameManager.s_onMoveableObject = false;
-                }
-            }
-            // Wizard will not die if being preserved by fairy
-            else if (PreserveManager.IsPreservingWizard())
-            {
-                GameManager.s_onMoveableObject = false;
-            }
-
-            // If on movemable object
-            else
-            {
-                GameManager.s_onMoveableObject = true;
-            }
-        }
-    }
-
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wizard"))
+        // Wizard collision + scene is in middle of changing
+        if (GameManager.s_sceneChange && collision.gameObject.CompareTag("Wizard"))
         {   
             // Fairy is preserving an object that is not the wizard
-            if (PreserveManager.IsPreserving() && !PreserveManager.IsPreservingWizard())
+            if (PreserveManager.Instance.IsPreserving() && !PreserveManager.Instance.IsPreservingWizard())
             {
-                // If object fairy is preserving is not the object the wizard is standing on
-                if (!ReferenceEquals(transform.gameObject, PreserveManager.GetPreservedObject()))
+                // If object fairy is preserving is not the object the wizard is standing on, wizard will die
+                if (!ReferenceEquals(transform.gameObject, PreserveManager.Instance.GetPreservedObject()))
                 {
-                    GameManager.s_onMoveableObject = true;
+                    GameManager.s_onDeathObject = true;
                 }
                 else
                 {
                     // Wizard will not die because fairy is preserving object
-                    GameManager.s_onMoveableObject = false;
+                    GameManager.s_onDeathObject = false;
                 }
             }
             // Wizard will not die if being preserved by fairy
-            else if (PreserveManager.IsPreservingWizard())
+            else if (PreserveManager.Instance.IsPreservingWizard())
             {
-                GameManager.s_onMoveableObject = false;
+                GameManager.s_onDeathObject = false;
             }
 
-            // If on movemable object
+            // If on death object
             else
             {
-                GameManager.s_onMoveableObject = true;
+                GameManager.s_onDeathObject = true;
             }
         }
     }
@@ -73,7 +42,7 @@ public class DeathZone : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wizard"))
         {
-            GameManager.s_onMoveableObject = false;
+            GameManager.s_onDeathObject = false;
         }
     }
 }

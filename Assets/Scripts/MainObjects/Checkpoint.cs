@@ -17,7 +17,7 @@ public class Checkpoint : MonoBehaviour
         {
             GameManager.s_wizardRespawnX = checkpoint.position.x;
             GameManager.s_wizardRespawnY = checkpoint.position.y;
-            GameManager.s_checkpointPhase = GameManager.s_phase;
+            GameManager.s_checkpointPhase = GameManager.s_curPhase;
         }
     }
 }

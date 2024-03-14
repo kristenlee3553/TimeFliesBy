@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// WHERE USER COMPLETS THE LEVEL
+/// WHERE USER COMPLETES THE LEVEL
 /// FUTURE -> SAVE GAME DATA
 /// </summary>
 public class Portal : MonoBehaviour, IInteractable

@@ -29,4 +29,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dino/DinoBack.unity
     guid: 1497fe7870d787448aa4cb9b25187859
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tut1.unity
+    guid: 36eca55a9bde6684a9d32cc0f90b1232
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/TutBack.unity
+    guid: a7e0ce2fe46da664688335924479162c
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tut2.unity
+    guid: 04fab1a07f692dc4a90f02cb45aad475
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tut3.unity
+    guid: d311be26860742846bcd46798180fb9c
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tut4.unity
+    guid: 93b79d413d145304982c5d7791bb6f67
+  - enabled: 1
+    path: Assets/Scenes/Tutorial/Tut5.unity
+    guid: 8a08d8b8601f130418474138fe2d6621
   m_configObjects: {}
