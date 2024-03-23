@@ -164,4 +164,14 @@ public class FairyMovement : MonoBehaviour
     {
         rbFairy.velocity = Vector2.zero;
     }
+
+    public void RepositionFairy(float x, float y, float z)
+    {
+        gameObject.transform.position = new Vector3(x, y, z);
+    }
+
+    public void ResizeFairy(float x, float y, float z)
+    {
+        gameObject.transform.localScale = new Vector3(x, y, z);
+    }
 }

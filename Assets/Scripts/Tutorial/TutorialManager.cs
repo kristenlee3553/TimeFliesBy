@@ -193,9 +193,7 @@ public class TutorialManager : MonoBehaviour
 
     void JoinConversation()
     {
-        ResetManager.Instance.DisableFairyMovement(true);
-        ResetManager.Instance.DisablePower(true);
-        ResetManager.Instance.DisableWizardInput(true);
+        ResetManager.Instance.DisableAll(true);
     }
 
     void LeaveConversation()

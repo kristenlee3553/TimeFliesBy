@@ -61,7 +61,7 @@ public class ResetManager : MonoBehaviour
     private void OnSceneUnloaded(Scene scene)
     {
         // If not on UI screen
-        if (GameManager.s_onGameLevel)
+        if (GameManager.s_onGameLevel && GameManager.s_level != "PreTut")
         {
             SetLevelRelatedObjects();
             CheckOnSceneCollision();
@@ -75,7 +75,7 @@ public class ResetManager : MonoBehaviour
     /// <param name="mode"></param>
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (GameManager.s_onGameLevel)
+        if (GameManager.s_onGameLevel && GameManager.s_level != "PreTut")
         {
             PreserveObject();
         }
@@ -129,21 +129,43 @@ public class ResetManager : MonoBehaviour
         GameManager.s_curPhase = nextPhase;
         
         // Reposition wizard if needed
-        if (!PreserveManager.Instance.IsPreservingWizard())
+        if (!PreserveManager.Instance.IsPreservingWizard() && level != "PreTut")
         {
             yield return StartCoroutine(CheckForReposition());
         }
 
+        // If new level
+        if (level != GameManager.s_level)
+        {
+            AsyncOperation asyncUnload2 = SceneManager.UnloadSceneAsync(GameManager.s_level + "Back");
+
+            // Wait until scene is unloaded
+            while (!asyncUnload2.isDone)
+            {
+                yield return null;
+            }
+            GameManager.s_level = level;
+
+            // Load new scene
+            AsyncOperation asyncLoad2 = SceneManager.LoadSceneAsync(GameManager.s_level + "Back", LoadSceneMode.Additive);
+
+            // Wait until scene is loaded
+            while (!asyncLoad2.isDone)
+            {
+                yield return null;
+            }
+        }
+
         // Load new scene
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(next_scene, LoadSceneMode.Additive);
-        
+
         // Wait until scene is loaded
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        AsyncOperation asyncUnload =  SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
+        AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
 
         // Wait until scene is unloaded
         while (!asyncUnload.isDone)
@@ -154,9 +176,28 @@ public class ResetManager : MonoBehaviour
         // UI Bar
         GameUIHandler.Instance.SetPhase(GameManager.s_curPhase);
 
+        HandlePowerDisabling();
 
+    }
+
+    private IEnumerator UnloadScene()
+    {
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
+            
+            // Wait until scene is unloaded
+            while (!asyncUnload.isDone)
+            {
+                yield return null;
+            }
+    }
+
+    /// <summary>
+    /// Whether to enable or disable fairy power
+    /// </summary>
+    public void HandlePowerDisabling()
+    {
         // Tutorial code (bad code cuz can make it can be more concise)
-        if (GameManager.s_level == "Tut" && TutorialManager.s_disablePower)
+        if (GameManager.s_level == "Tut" && TutorialManager.s_disablePower || GameManager.s_level == "PreTut")
         {
             DisablePower(true);
         }
@@ -165,7 +206,6 @@ public class ResetManager : MonoBehaviour
             // Enable fairy powers 
             DisablePower(false);
         }
-
     }
 
     /// <summary>
@@ -361,13 +401,12 @@ public class ResetManager : MonoBehaviour
         }
 
         // Enable Input and Reset back to normal
-        DisableWizardInput(false);
-        DisablePower(false);
+        HandlePowerDisabling();
         DisableFairyMovement(false);
+        DisableWizardInput(false);
         col.enabled = true;
         wizardMove.ResetWizard();
         fairyMove.ResetFairy();
-
     }
 
     /// <summary>
@@ -432,5 +471,28 @@ public class ResetManager : MonoBehaviour
     public void TriggerTimeAnimation()
     {
         fairyAnim.SetTrigger("Power");
+    }
+
+    /// <summary>
+    /// Resizes wizard
+    /// </summary>
+    public void ResizeWizard(float x, float y, float z)
+    {
+        wizardMove.ResizeWizard(x, y, z);
+    }
+
+    public void RepositionWizard(float x, float y, float z)
+    {
+        wizardMove.RepositionWizard(x, y, z);
+    }
+
+    public void ResizeFairy(float x, float y, float z)
+    {
+        fairyMove.ResizeFairy(x, y, z);
+    }
+
+    public void RepositionFairy(float x, float y, float z)
+    {
+        fairyMove.RepositionFairy(x, y, z);
     }
 }

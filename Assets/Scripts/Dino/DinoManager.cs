@@ -111,6 +111,7 @@ public class DinoManager : MonoBehaviour
     {
         GameUIHandler.OnDialogueStarted -= JoinConversation;
         GameUIHandler.OnDialogueEnded -= LeaveConversation;
+        GameUIHandler.Instance.ShowOrbDisplay();
     }
 
 }

@@ -83,6 +83,7 @@ public class WizardMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     public Transform headCheck;
+    private SpriteRenderer sr;
 
     // --------------- Physics ------------------------
     [SerializeField]
@@ -125,14 +126,15 @@ public class WizardMovement : MonoBehaviour
     /// </summary>
     private IInteractable interactObject;
 
-    private List<Collider2D> collidedObjects = new List<Collider2D>();
-
+    private readonly List<Collider2D> collidedObjects = new List<Collider2D>();
+ 
     private void Start()
     {
         // Initiate Variables
         collider = GetComponent<CapsuleCollider2D>();
         rbWizard = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         colliderSize = collider.size;
 
@@ -424,9 +426,7 @@ public class WizardMovement : MonoBehaviour
         if (isFacingRight && wizardMovement < 0f || !isFacingRight && wizardMovement > 0f)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            sr.flipX = !sr.flipX;
         }
     }
 
@@ -499,5 +499,20 @@ public class WizardMovement : MonoBehaviour
         rbWizard.velocity = Vector2.zero;
         animator.SetFloat("speed", 0);
         wizardMovement = 0.0f;
+    }
+
+    public void ResizeWizard(float x, float y, float z)
+    {
+        gameObject.transform.localScale = new Vector3(x, y, z);
+    }
+
+    public void RepositionWizard(float x, float y, float z)
+    {
+        lastY = y;
+        wizardMovement = 0.0f;
+        gameObject.transform.position = new Vector3(x, y, z);
+        isFacingRight = true;
+        sr.flipX = true;
+        
     }
 }

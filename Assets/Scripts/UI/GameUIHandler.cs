@@ -134,7 +134,9 @@ public class GameUIHandler : MonoBehaviour
     private void CloseHintMenu(ClickEvent evt)
     {
         hintUI.style.display = DisplayStyle.None;
-        ResetManager.Instance.DisableAll(false);
+        ResetManager.Instance.HandlePowerDisabling();
+        ResetManager.Instance.DisableWizardInput(false);
+        ResetManager.Instance.DisableFairyMovement(false);
     }
 
     /// <summary>
@@ -161,6 +163,17 @@ public class GameUIHandler : MonoBehaviour
         else if (GameManager.s_level == "Dino")
         {
             DinoManager.ResetVariables();
+        }
+        else if (GameManager.s_level == "PreTut")
+        {
+            if (GameManager.s_curPhase == 1)
+            {
+                PreTutManager.ResetVariables(1);
+            }
+            else
+            {
+                PreTutManager.ResetVariables(2);
+            }
         }
     }
 
@@ -258,7 +271,6 @@ public class GameUIHandler : MonoBehaviour
         // UI
         m_dialogue.style.display = DisplayStyle.None;
         m_menuButtonContanier.style.display = DisplayStyle.Flex;
-        ShowOrbDisplay();
     }
 
     /// <summary>

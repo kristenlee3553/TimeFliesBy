@@ -44,4 +44,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial/Tut5.unity
     guid: 8a08d8b8601f130418474138fe2d6621
+  - enabled: 1
+    path: Assets/Scenes/PreTut/PreTut1.unity
+    guid: 8de804b71621b214b84e2052212e4a57
+  - enabled: 1
+    path: Assets/Scenes/PreTut/PreTut2.unity
+    guid: 9cef574f948647d4796fcedef2681f60
+  - enabled: 1
+    path: Assets/Scenes/PreTut/PreTutBack.unity
+    guid: 574bd818dc2d03a45a8e3ad089466ece
   m_configObjects: {}
