@@ -6,12 +6,10 @@ using UnityEngine;
 public class FreezeObject : MonoBehaviour
 {
     private FairyMovement fairyMove;
-    private Animator animator;
 
     private void Start()
     {
         fairyMove = GetComponent<FairyMovement>();
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,7 +22,7 @@ public class FreezeObject : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.Instance.IsPreserving())
             {
                 // Stop animation
-                animator.SetBool("Holding", false);
+                PreserveManager.Instance.SetHoldingAnimation(false);
 
 
                 // Wizard specific
@@ -32,14 +30,6 @@ public class FreezeObject : MonoBehaviour
                 {
                     PreserveManager.Instance.SetPreservingWizard(false);
                     PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
-                }
-                // Tutorial specific
-                else if (GameManager.s_level == "Tut")
-                {
-                    if (PreserveManager.Instance.GetPreservedObject().CompareTag("Apple")) {
-                        // Enable gravity
-                        PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
-                    }
                 }
 
                 // Highlight color
@@ -55,22 +45,13 @@ public class FreezeObject : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.Instance.CanPreserve())
             {
                 // Set hold animation
-                animator.SetBool("Holding", true);
+                PreserveManager.Instance.SetHoldingAnimation(true);
 
                 // Wizard specific
                 if (PreserveManager.Instance.GetPreservableObject().CompareTag("Wizard"))
                 {
                     PreserveManager.Instance.SetPreservingWizard(true);
                     PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
-                }
-                // Tutorial specific
-                else if (GameManager.s_level == "Tut")
-                {
-                    if (PreserveManager.Instance.GetPreservableObject().CompareTag("Apple"))
-                    {
-                        // Enable gravity
-                        PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
-                    }
                 }
 
                 PreserveManager.Instance.SetPreservedObject(PreserveManager.Instance.GetPreservableObject());

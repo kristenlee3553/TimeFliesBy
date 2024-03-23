@@ -493,4 +493,11 @@ public class WizardMovement : MonoBehaviour
         rbWizard.velocity = Vector2.zero;
         lastY = groundCheck.position.y; // Probably will cause some bugs
     }
+
+    public void StopVelocity()
+    {
+        rbWizard.velocity = Vector2.zero;
+        animator.SetFloat("speed", 0);
+        wizardMovement = 0.0f;
+    }
 }

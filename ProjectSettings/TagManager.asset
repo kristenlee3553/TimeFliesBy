@@ -15,6 +15,7 @@ TagManager:
   - Nest
   - Orb0
   - Apple
+  - Seed
   layers:
   - Default
   - TransparentFX
@@ -63,4 +64,7 @@ TagManager:
     locked: 0
   - name: Fairy
     uniqueID: 3239129493
+    locked: 0
+  - name: Prompt
+    uniqueID: 3718235569
     locked: 0

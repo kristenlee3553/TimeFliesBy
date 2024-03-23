@@ -19,7 +19,10 @@ public class ChangeTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!fairyMove.IsPowerDisabled())
+        // Wacky code in the second half.
+        // There was a bug that left me scratching my head for a few hours
+        // This was the solution and I'm too tired to find a more elegant way
+        if (!fairyMove.IsPowerDisabled() && GameManager.s_level != "Tut" || TutorialManager.s_firstPower)
         {
             // Go back in time
             if (Input.GetKeyUp(KeyCode.Q))
@@ -34,7 +37,7 @@ public class ChangeTime : MonoBehaviour
                     }
 
                     // Change scene
-                    ResetManager.Instance.ChangePhase(GameManager.s_curPhase - 1, GameManager.s_level);
+                    StartCoroutine(ResetManager.Instance.ChangeScene(GameManager.s_curPhase - 1, GameManager.s_level));
                 }
 
             }
@@ -45,7 +48,7 @@ public class ChangeTime : MonoBehaviour
                 // If not at last phase
                 if (!MaxPhase())
                 {
-                    ResetManager.Instance.ChangePhase(GameManager.s_curPhase + 1, GameManager.s_level);
+                    StartCoroutine(ResetManager.Instance.ChangeScene(GameManager.s_curPhase + 1, GameManager.s_level));
 
                     if (!PreserveManager.Instance.IsPreserving())
                     {

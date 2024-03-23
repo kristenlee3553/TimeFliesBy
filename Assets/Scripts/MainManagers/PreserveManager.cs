@@ -32,6 +32,9 @@ public class PreserveManager : MonoBehaviour
     /// </summary>
     public readonly Color highlightColor = Color.yellow;
 
+    [SerializeField] private GameObject fairy;
+    private Animator animator;
+
     public static PreserveManager Instance { get; private set; }
 
     private void Awake()
@@ -46,6 +49,25 @@ public class PreserveManager : MonoBehaviour
         Instance = this;
         // Script will last between scenes
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        animator = fairy.GetComponent<Animator>();   
+    }
+
+    public void SetHoldingAnimation(bool hold)
+    {
+        animator.SetBool("Holding", hold);
+    }
+
+    public void ResetManager()
+    {
+        SetPreservableObject(null);
+        SetPreservedObject(null);
+        SetPreservingWizard(false);
+        SetStartColor(Color.white);
+        SetHoldingAnimation(false);
     }
 
     /// <summary>

@@ -84,7 +84,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.42, y: 1.61}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rbFairy: {fileID: 7328277961955968279}
-  noInputFairy: 0
 --- !u!50 &7328277961955968279
 Rigidbody2D:
   serializedVersion: 4
@@ -166,10 +165,10 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.020534575, y: 0.2772177}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.02}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.49738333, y: 0.16203655}
-    oldSize: {x: 2.34, y: 1.54}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 2.42, y: 1.61}
+    newSize: {x: 2.42, y: 1.61}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

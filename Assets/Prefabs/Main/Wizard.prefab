@@ -75,7 +75,6 @@ GameObject:
   - component: {fileID: 394851570292525250}
   - component: {fileID: 1153100598425247320}
   - component: {fileID: -4228443284578964903}
-  - component: {fileID: 6638645515777329057}
   - component: {fileID: 3141412735876915512}
   - component: {fileID: 4832157723755993598}
   m_Layer: 0
@@ -195,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   jumpingPower: 5
+  isGrounded: 0
   slopeCheckDistance: 0.5
   maxSlopeAngle: 40
   groundCheck: {fileID: 6307255641630430368}
@@ -216,20 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b41b801ef0ad409171ea4dcebcf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6638645515777329057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6903900686484731941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54c12052679ed0244bd7fddcb44f44f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wizard: {fileID: 6903900686484731941}
-  fairy: {fileID: 0}
 --- !u!95 &3141412735876915512
 Animator:
   serializedVersion: 5

@@ -12,7 +12,7 @@ public class LoadGame : MonoBehaviour
 {
     void Awake()
     {
-        //SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive); // Background
+        SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive); // Background
         //SceneManager.LoadScene("GameScene", LoadSceneMode.Additive); // Characters
 
         // Set up key bindings
@@ -38,9 +38,10 @@ public class LoadGame : MonoBehaviour
 
     IEnumerator SetUpLevel()
     {
-        // Uncomment this if needed
+        // Uncomment for tutorial setup
         //GameManager.s_level = "Tut";
         //GameManager.s_curScene = "Tut1";
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
         // Wait until scene is loaded
@@ -50,6 +51,10 @@ public class LoadGame : MonoBehaviour
         }
 
         ResetManager.Instance.SetLevelRelatedObjects();
-        GameUIHandler.Instance.HideOrbDisplay();
+        
+        // Uncomment for tutorial
+        //GameUIHandler.Instance.HideOrbDisplay();
+        //GameUIHandler.Instance.HideTimeBar();
+        //ResetManager.Instance.DisablePower(true);
     }
 }

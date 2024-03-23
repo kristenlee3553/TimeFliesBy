@@ -2,17 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Apple : MonoBehaviour
+public class Apple : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
+    private Color startColor;
+    private SpriteRenderer spriteRenderer;
+    private bool ripe = false;
+    [SerializeField] private GameObject prompt;
+
+    private void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        startColor = spriteRenderer.color;
+        string name = gameObject.name;
+        if (name == "RipeApple")
+        {
+            ripe = true;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Interact()
     {
-        
+        if (ripe)
+        {
+            TutorialManager.s_hasRipeApple = true;
+        }
+        else
+        {
+            TutorialManager.s_hasUnripeApple = true;
+        }
+
+        // Reset variables
+        PreserveManager.Instance.ResetManager();
+
+        prompt.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+    public void RemoveInteractable()
+    {
+        spriteRenderer.color = startColor;
+        prompt.SetActive(false);
+    }
+
+    public void ShowInteractable()
+    {
+        spriteRenderer.color = GameManager.s_interactColor;
+        prompt.SetActive(true);
     }
 }

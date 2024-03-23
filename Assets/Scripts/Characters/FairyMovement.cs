@@ -116,15 +116,13 @@ public class FairyMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets velocity of fairy to 0. Resets animation and preservation variables.
+    /// </summary>
     public void ResetFairy()
     {
         rbFairy.velocity = Vector2.zero;
-        animator.SetBool("Holding", false);
-
-        // Reset all preserving variables
-        PreserveManager.Instance.SetPreservableObject(null);
-        PreserveManager.Instance.SetPreservedObject(null);
-        PreserveManager.Instance.SetPreservingWizard(false);
+        PreserveManager.Instance.ResetManager();
     }
 
     /// <summary>
@@ -157,5 +155,13 @@ public class FairyMovement : MonoBehaviour
     public bool IsPowerDisabled()
     {
         return disablePower;
+    }
+
+    /// <summary>
+    /// Sets velocity to 0
+    /// </summary>
+    public void StopFairyVelocity()
+    {
+        rbFairy.velocity = Vector2.zero;
     }
 }

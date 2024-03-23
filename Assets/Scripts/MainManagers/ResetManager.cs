@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 /// <summary>
-/// HANDLES RESETTING OF LEVEL, CHANGING PHASES, DEATH ANIMATION
+/// HANDLES RESETTING OF LEVEL, CHANGING PHASES, DEATH ANIMATION.
+/// HAS METHODS TO RESET AND DISABLE INPUT OF PLAYERS
 /// </summary>
 public class ResetManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class ResetManager : MonoBehaviour
     private SpriteRenderer wizardSpriteRenderer;
     private SpriteRenderer fairySpriteRenderer;
     private CapsuleCollider2D col;
+    private Animator fairyAnim;
+    private Animator wizardAnim;
 
     public static ResetManager Instance { get; private set; }
 
@@ -40,6 +43,9 @@ public class ResetManager : MonoBehaviour
 
         wizardSpriteRenderer = wizard.GetComponent<SpriteRenderer>();
         fairySpriteRenderer = fairy.GetComponent<SpriteRenderer>();
+
+        fairyAnim = fairy.GetComponent<Animator>();
+        wizardAnim = wizard.GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -108,15 +114,11 @@ public class ResetManager : MonoBehaviour
     /// </summary>
     /// <param name="nextPhase"></param>
     /// <param name="level"></param>
-    public void ChangePhase(int nextPhase, string level)
-    {
-        StartCoroutine(ChangeScene(nextPhase, level));
-    }
-
-    private IEnumerator ChangeScene(int nextPhase, string level)
+    /// <returns></returns>
+    public IEnumerator ChangeScene(int nextPhase, string level)
     {
         // Disable fairy powers 
-        fairyMove.DisablePower(true);
+        DisablePower(true);
 
         // Name of next scene
         string next_scene = level + nextPhase;
@@ -152,8 +154,17 @@ public class ResetManager : MonoBehaviour
         // UI Bar
         GameUIHandler.Instance.SetPhase(GameManager.s_curPhase);
 
-        // Enable fairy powers 
-        fairyMove.DisablePower(false);
+
+        // Tutorial code (bad code cuz can make it can be more concise)
+        if (GameManager.s_level == "Tut" && TutorialManager.s_disablePower)
+        {
+            DisablePower(true);
+        }
+        else
+        {
+            // Enable fairy powers 
+            DisablePower(false);
+        }
 
     }
 
@@ -218,6 +229,23 @@ public class ResetManager : MonoBehaviour
                 }
             }
         }
+        else if (GameManager.s_level == "Tut")
+        {
+            // Wizard has seed -> forever hide the seed
+            if (TutorialManager.s_hasSeed && GameManager.s_curPhase == 1)
+            {
+                GameObject seed = GameObject.FindGameObjectWithTag("Seed");
+
+                if (seed != null)
+                {
+                    seed.SetActive(false);
+                }
+            }
+
+            // Scene change, so no more apple 
+            TutorialManager.s_hasRipeApple = false;
+            TutorialManager.s_hasUnripeApple = false;
+        }
     }
 
     /// <summary>
@@ -264,20 +292,21 @@ public class ResetManager : MonoBehaviour
     IEnumerator DeathAnimation(bool resetLevel)
     {
         // Pause input and reset character's variables and velocity
-        wizardMove.DisableInput(true);
-        fairyMove.DisablePower(true);
-        fairyMove.DisableMovement(true);
+        DisableWizardInput(true);
+        DisablePower(true);
+        DisableFairyMovement(true);
         wizardMove.ResetWizard();
         fairyMove.ResetFairy();
-
-        // CHANGE TO DEATH FACE
-        wizardSpriteRenderer.color = Color.red;
 
         // Pauses wizard
         rb.gravityScale = 0;
 
         // Wait
         yield return new WaitForSeconds(0.25f);
+
+        // Death face
+        wizardSpriteRenderer.color = Color.white;
+        wizardAnim.SetBool("Dead", true);
 
         // Allow wizard to fall through objects
         col.enabled = false;
@@ -316,7 +345,8 @@ public class ResetManager : MonoBehaviour
         float wizardY = resetLevel? GameManager.s_wizardResetY : GameManager.s_wizardRespawnY;
 
         // Move wizard to respawn point
-        wizardSpriteRenderer.color = Color.white; // FACE
+        wizardAnim.SetBool("Dead", false);
+        wizardSpriteRenderer.color = Color.white;
         wizard.transform.position = new Vector3(wizardX, wizardY, wizard.transform.position.z);
 
         // Move fairy to respawn point
@@ -328,15 +358,79 @@ public class ResetManager : MonoBehaviour
         {
             ResetOrbs();
             GameUIHandler.Instance.SetOrbCounter();
-        } 
+        }
 
         // Enable Input and Reset back to normal
-        wizardMove.DisableInput(false);
-        fairyMove.DisablePower(false);
-        fairyMove.DisableMovement(false);
+        DisableWizardInput(false);
+        DisablePower(false);
+        DisableFairyMovement(false);
         col.enabled = true;
         wizardMove.ResetWizard();
         fairyMove.ResetFairy();
 
+    }
+
+    /// <summary>
+    /// Disables time traversal and freezing mechanic
+    /// </summary>
+    /// <param name="disable"></param>
+    public void DisablePower(bool disable)
+    {
+        fairyMove.DisablePower(disable);
+    }
+
+    /// <summary>
+    /// Disables wizard's ability to jump and move
+    /// </summary>
+    /// <param name="disable"></param>
+    public void DisableWizardInput(bool disable)
+    {
+        wizardMove.DisableInput(disable);
+    }
+
+    /// <summary>
+    /// Disables fairy movement
+    /// </summary>
+    /// <param name="disable"></param>
+    public void DisableFairyMovement(bool disable)
+    {
+        fairyMove.DisableMovement(disable);
+    }
+
+    /// <summary>
+    /// Disables all player input
+    /// </summary>
+    /// <param name="disable"></param>
+    public void DisableAll(bool disable)
+    {
+        fairyMove.DisableMovement(disable);
+        wizardMove.DisableInput(disable);
+        fairyMove.DisablePower(disable);
+    }
+
+    /// <summary>
+    /// Returns if the fairy's power is disabled
+    /// </summary>
+    /// <returns></returns>
+    public bool IsPowerDisabled()
+    {
+        return fairyMove.IsPowerDisabled();
+    }
+
+    /// <summary>
+    /// Stops velocity of wizard and fairy.
+    /// </summary>
+    public void StopAllVelocity()
+    {
+        wizardMove.StopVelocity();
+        fairyMove.StopFairyVelocity();
+    }
+
+    /// <summary>
+    /// Triggers Fairy Power animation
+    /// </summary>
+    public void TriggerTimeAnimation()
+    {
+        fairyAnim.SetTrigger("Power");
     }
 }

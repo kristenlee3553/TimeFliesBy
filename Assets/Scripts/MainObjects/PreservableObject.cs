@@ -10,7 +10,7 @@ public class Preserve : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Fairy") && !PreserveManager.Instance.CanPreserve()
-            && !PreserveManager.Instance.IsPreserving())
+            && !PreserveManager.Instance.IsPreserving() && !ResetManager.Instance.IsPowerDisabled())
         {
             // Change color
             PreserveManager.Instance.SetStartColor(this.GetComponent<SpriteRenderer>().color);
@@ -25,7 +25,8 @@ public class Preserve : MonoBehaviour
     {
         // Sometimes the fairy is knocked away from the wizard if wizard
         // collides on scene change which results in staying yellow
-        if (collision.CompareTag("Fairy") && !PreserveManager.Instance.IsPreserving())
+        if (collision.CompareTag("Fairy") 
+            && !PreserveManager.Instance.IsPreserving() && !ResetManager.Instance.IsPowerDisabled())
         {
             // Revert to original color
             this.GetComponent<SpriteRenderer>().color = PreserveManager.Instance.GetStartColor();

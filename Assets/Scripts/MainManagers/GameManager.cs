@@ -57,6 +57,7 @@ public static class GameManager
     /// </summary>
     public static float s_wizardResetX = -7.53f;
 
+    // dino -> -7.53f;
     // tutorial -> -7.56f
 
     /// <summary>
@@ -64,6 +65,7 @@ public static class GameManager
     /// </summary>
     public static float s_wizardResetY = 1.07f;
 
+    // dino -> 1.07f;
     // tutorial -> -3.19f
 
     /// <summary>

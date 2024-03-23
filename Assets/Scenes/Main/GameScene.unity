@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fairy
       objectReference: {fileID: 0}
+    - target: {fileID: 1281802095884592762, guid: c44b4d36be86362488898e5ce5cd3259, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4501045157178893621, guid: c44b4d36be86362488898e5ce5cd3259, type: 3}
       propertyPath: wizard
       value: 
@@ -410,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8497f255fac064341bdcf6150bc4e66b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fairy: {fileID: 1035789964}
 --- !u!4 &1416513487
 Transform:
   m_ObjectHideFlags: 0
@@ -511,13 +516,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wizard
       objectReference: {fileID: 0}
+    - target: {fileID: 6903900686484731941, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.56
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.19
+      value: 1.42
       objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -551,8 +560,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6638645515777329057, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
