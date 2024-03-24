@@ -99,6 +99,7 @@ public class DinoManager : MonoBehaviour
         ResetManager.Instance.DisableFairyMovement(false);
         ResetManager.Instance.DisablePower(false);
         ResetManager.Instance.DisableWizardInput(false);
+        GameUIHandler.Instance.ShowOrbDisplay();
     }
 
     private void OnEnable()
