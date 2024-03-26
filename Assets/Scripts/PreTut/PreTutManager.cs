@@ -6,9 +6,12 @@ public class PreTutManager : MonoBehaviour
     public GameObject background1;
     public GameObject background2;
 
+    public static bool fairyDoor = false;
+
     private static bool setBackground2 = false;
     private static bool startedDia1 = false;
     private static bool startedDia2 = false;
+    private static bool fairyDiaStarted = false;
     private static bool levelReset = false;
 
     // Update is called once per frame
@@ -31,6 +34,12 @@ public class PreTutManager : MonoBehaviour
         {
             setBackground2 = true;
             SetBackground();
+        }
+
+        if (fairyDoor && !fairyDiaStarted)
+        {
+            fairyDiaStarted = true;
+            GameUIHandler.Instance.StartDialogue(dialogueAsset[2].dialogue);
         }
 
         if (levelReset)
@@ -57,6 +66,9 @@ public class PreTutManager : MonoBehaviour
             startedDia1 = true;
         }
         startedDia2 = false;
+        fairyDoor = false;
+        fairyDiaStarted = false;
+
     }
 
     void JoinConversation()

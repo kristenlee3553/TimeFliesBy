@@ -168,7 +168,7 @@ public class TutorialManager : MonoBehaviour
 
         ResetManager.Instance.DisablePower(true);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[3].dialogue);
         yield return null;
     }
@@ -176,7 +176,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator StartFreezeIntro()
     {
         s_disablePower = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[4].dialogue);
         s_disablePower = false;
         yield return null;
@@ -185,7 +185,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator StartFirstFreeze()
     {
         s_disablePower = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[6].dialogue);
         s_disablePower = false;
         yield return null;

@@ -60,7 +60,7 @@ public class LoadGame : MonoBehaviour
 
         ResetManager.Instance.SetLevelRelatedObjects();
         ResetManager.Instance.ResizeFairy(1.08f, 1.00f, 1);
-        ResetManager.Instance.ResizeWizard(0.68f, 0.66f, 1);
+        ResetManager.Instance.ResizeWizard(1.146864f, 1.076966f, 1);
         ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
         ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
 
