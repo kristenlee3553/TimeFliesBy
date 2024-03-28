@@ -23,7 +23,11 @@ public class GameUIHandler : MonoBehaviour
 
     [SerializeField] GameObject wizard;
 
+    [SerializeField] GameObject pauseMenuObject;
+
     private ResetManager resetManager;
+
+    private PauseMenu pauseMenuManager;
 
     /// <summary>
     /// So that other classes can call methods here using the class name
@@ -46,6 +50,7 @@ public class GameUIHandler : MonoBehaviour
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
 
         resetManager = wizard.GetComponent<ResetManager>();
+        pauseMenuManager = pauseMenuObject.GetComponent<PauseMenu>();
 
         m_resetButton.RegisterCallback<ClickEvent>(ResetEvent);
         m_menuButton.RegisterCallback<ClickEvent>(MenuEvent);
@@ -61,7 +66,7 @@ public class GameUIHandler : MonoBehaviour
 
     private void MenuEvent(ClickEvent evt)
     {
-        Debug.Log("Menu Clicked");
+        pauseMenuManager.Pause();
     }
 
     /// <summary>
