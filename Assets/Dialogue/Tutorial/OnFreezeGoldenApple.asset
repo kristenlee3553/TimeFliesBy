@@ -16,11 +16,13 @@ MonoBehaviour:
   - dialogue: Finally...
     name: TimeLord
     checkpoint: 0
-  - dialogue: I can freeze objects in my sleep...
+  - dialogue: Could you go any slower?
     name: TimeLord
     checkpoint: 0
-  - dialogue: I see... Since I'm freezing this apple, it will not disapear when I
-      change time.
+  - dialogue: 'I see... Since I''m freezing this apple, it will not disapp
+
+      ear
+      when I change time.'
     name: Fairy
     checkpoint: 1
   - dialogue: I can only freeze one object at a time though...
@@ -31,4 +33,4 @@ MonoBehaviour:
     checkpoint: 0
   - dialogue: If only, I could reach the apple...
     name: Wizard
-    checkpoint: 1
+    checkpoint: 0

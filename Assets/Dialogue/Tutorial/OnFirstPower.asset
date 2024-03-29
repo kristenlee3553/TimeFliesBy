@@ -21,8 +21,8 @@ MonoBehaviour:
     checkpoint: 0
   - dialogue: Hurry up. Bring me the apple.
     name: TimeLord
-    checkpoint: 1
-  - dialogue: Super cool! So now I can move time forwards with E and move time backwards
-      with Q.
+    checkpoint: 0
+  - dialogue: So now I can move time forwards with E and move time backwards with
+      Q.
     name: Fairy
     checkpoint: 1

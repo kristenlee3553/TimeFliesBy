@@ -28,7 +28,7 @@ MonoBehaviour:
   - dialogue: Flying is really tiring you know!
     name: Fairy
     checkpoint: 0
-  - dialogue: Deflection.
+  - dialogue: Mhmm.
     name: Wizard
     checkpoint: 0
   - dialogue: Yeah yeah, come on, let's hurry up!

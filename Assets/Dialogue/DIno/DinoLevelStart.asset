@@ -39,10 +39,10 @@ MonoBehaviour:
     checkpoint: 0
   - dialogue: Look, I can see orbs in this time period.
     name: Fairy
-    checkpoint: 1
+    checkpoint: 0
   - dialogue: I bet the more orbs we collect, the stronger you will become!
     name: Fairy
-    checkpoint: 1
+    checkpoint: 0
   - dialogue: Oh I see a portal too!
     name: Fairy
     checkpoint: 0

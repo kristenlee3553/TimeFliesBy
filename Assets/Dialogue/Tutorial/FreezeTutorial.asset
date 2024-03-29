@@ -18,7 +18,7 @@ MonoBehaviour:
     checkpoint: 0
   - dialogue: Fairy, try freezing the apple.
     name: TimeLord
-    checkpoint: 1
+    checkpoint: 0
   - dialogue: Fly to the golden apple and press the space bar.
     name: TimeLord
     checkpoint: 1

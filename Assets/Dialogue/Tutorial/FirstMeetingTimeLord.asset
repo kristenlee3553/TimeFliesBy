@@ -33,17 +33,8 @@ MonoBehaviour:
   - dialogue: ...
     name: TimeLord
     checkpoint: 0
-  - dialogue: And alas, I really have nothing else to teach.
+  - dialogue: Except...
     name: TimeLord
-    checkpoint: 0
-  - dialogue: "EXCEPT\u2026"
-    name: TimeLord
-    checkpoint: 0
-  - dialogue: EXCEPT?
-    name: Fairy
-    checkpoint: 0
-  - dialogue: "\u2026Except?"
-    name: Wizard
     checkpoint: 0
   - dialogue: This one high level spell.
     name: TimeLord
