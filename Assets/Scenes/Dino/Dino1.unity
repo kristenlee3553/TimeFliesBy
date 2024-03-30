@@ -188,6 +188,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5263398324607654576, guid: be39e897a8a2cfa49b3ffc891ab5ad6b, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5506885349979984114, guid: be39e897a8a2cfa49b3ffc891ab5ad6b, type: 3}
       propertyPath: m_Name
       value: Dino2Reposition

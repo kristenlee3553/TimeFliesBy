@@ -180,17 +180,6 @@ public class ResetManager : MonoBehaviour
 
     }
 
-    private IEnumerator UnloadScene()
-    {
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(GameManager.s_lastScene);
-            
-            // Wait until scene is unloaded
-            while (!asyncUnload.isDone)
-            {
-                yield return null;
-            }
-    }
-
     /// <summary>
     /// Whether to enable or disable fairy power
     /// </summary>
@@ -219,7 +208,17 @@ public class ResetManager : MonoBehaviour
             GameManager.s_reposition[GameManager.s_curPhase].Reposition(wizard);
         }
 
+        ResetRepositionArray();
+
         yield return null;
+    }
+
+    private void ResetRepositionArray()
+    {
+        for (int i = 0; i < GameManager.s_reposition.Length; i++)
+        {
+            GameManager.s_reposition[i] = null;
+        }
     }
 
     /// <summary>
@@ -341,12 +340,12 @@ public class ResetManager : MonoBehaviour
         // Pauses wizard
         rb.gravityScale = 0;
 
-        // Wait
-        yield return new WaitForSeconds(0.25f);
-
         // Death face
         wizardSpriteRenderer.color = Color.white;
         wizardAnim.SetBool("Dead", true);
+
+        // Wait
+        yield return new WaitForSeconds(0.25f);
 
         // Allow wizard to fall through objects
         col.enabled = false;

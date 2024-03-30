@@ -17,7 +17,7 @@ public class PreTutManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!startedDia1)
+        if (!startedDia1 && GameManager.s_level == "PreTut")
         {
             startedDia1 = true;
             GameUIHandler.Instance.StartDialogue(dialogueAsset[0].dialogue);

@@ -491,7 +491,7 @@ public class WizardMovement : MonoBehaviour
         wizardMovement = 0.0f;
         isFrozen = false;
         rbWizard.velocity = Vector2.zero;
-        lastY = groundCheck.position.y; // Probably will cause some bugs
+        lastY = transform.position.y; // Probably will cause some bugs
     }
 
     public void StopVelocity()

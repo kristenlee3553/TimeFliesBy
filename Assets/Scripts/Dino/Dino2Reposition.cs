@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dino2Reposition : MonoBehaviour, IReposition
 {
     private IReposition iRep;
-    private EdgeCollider2D collider;
 
     private bool reposition = true;
 
     private void Start()
     {
         iRep = this;
-        collider = GetComponent<EdgeCollider2D>();
     }
 
     private void Update()
@@ -34,10 +30,26 @@ public class Dino2Reposition : MonoBehaviour, IReposition
 
     public void Reposition(GameObject wizard)
     {
-        Vector2 closestPoint = collider.ClosestPoint(wizard.transform.position);
-        closestPoint.y += 0.5f;
+        Vector2 curPos = wizard.transform.position;
+        Vector3 newPos = curPos;
 
-        wizard.transform.position = closestPoint;
+        if (curPos.x < 0.77f)
+        {
+            newPos.x = -2.84f;
+            newPos.y = -3.54f;
+        }
+        else if (curPos.x >= 0.77f)
+        {
+            newPos.x = 5.31f;
+            newPos.y = -3.48f;
+        }
+        else if (curPos.y >= -1.23)
+        {
+            newPos.x = 0.52f;
+            newPos.y = -0.75f;
+        }
+
+        wizard.transform.position = newPos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

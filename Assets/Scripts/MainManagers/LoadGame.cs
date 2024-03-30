@@ -12,7 +12,7 @@ public class LoadGame : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene("PreTutBack", LoadSceneMode.Additive); // Background
+        //SceneManager.LoadScene("PreTutBack", LoadSceneMode.Additive); // Background
         //SceneManager.LoadScene("GameScene", LoadSceneMode.Additive); // Characters
 
         // Set up key bindings
@@ -41,14 +41,14 @@ public class LoadGame : MonoBehaviour
         // Uncomment for tutorial setup
         //GameManager.s_level = "Tut";
         //GameManager.s_curScene = "Tut1";
-        GameManager.s_level = "PreTut";
-        GameManager.s_firstPhase = 1;
-        GameManager.s_curPhase = 1;
-        GameManager.s_curScene = "PreTut1";
-        GameManager.s_wizardResetX = -7.7f;
-        GameManager.s_wizardResetY = -3.1f;
-        GameManager.s_fairyResetX = -6.08f;
-        GameManager.s_fairyResetY = -2.63f;
+        //GameManager.s_level = "PreTut";
+        //GameManager.s_curScene = "PreTut1";
+        //GameManager.s_firstPhase = 1;
+        //GameManager.s_curPhase = 1;
+        //GameManager.s_wizardResetX = -7.7f;
+        //GameManager.s_wizardResetY = -3.1f;
+        //GameManager.s_fairyResetX = -6.08f;
+        //GameManager.s_fairyResetY = -2.63f;
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
@@ -59,13 +59,13 @@ public class LoadGame : MonoBehaviour
         }
 
         ResetManager.Instance.SetLevelRelatedObjects();
-        ResetManager.Instance.ResizeFairy(1.08f, 1.00f, 1);
-        ResetManager.Instance.ResizeWizard(1.146864f, 1.076966f, 1);
-        ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
-        ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
+        //ResetManager.Instance.ResizeFairy(1.35f, 1.35f, 1);
+        //ResetManager.Instance.ResizeWizard(1.146864f, 1.076966f, 1);
+        //ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
+        //ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
 
-        // Uncomment for tutorial
-        GameUIHandler.Instance.HideOrbDisplay();
-        GameUIHandler.Instance.HideTimeBar();
+        // uncomment for tutorial
+        //GameUIHandler.Instance.HideOrbDisplay();
+        //GameUIHandler.Instance.HideTimeBar();
     }
 }

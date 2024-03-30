@@ -117,7 +117,7 @@ public class TutorialManager : MonoBehaviour
                 "Maybe we can freeze the apple...");
             phase5SecondReached = true;
             freezePowerTutStarted = true;
-            GameUIHandler.Instance.StartDialogue(dialogueAsset[5].dialogue);
+            StartCoroutine(StartOnGoingBackToPhase5());
         }
 
         // Fairy first freezes the apple
@@ -166,9 +166,7 @@ public class TutorialManager : MonoBehaviour
         ResetManager.Instance.TriggerTimeAnimation();
         yield return StartCoroutine(ResetManager.Instance.ChangeScene(2, GameManager.s_level));
 
-        ResetManager.Instance.DisablePower(true);
-
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.0f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[3].dialogue);
         yield return null;
     }
@@ -176,8 +174,17 @@ public class TutorialManager : MonoBehaviour
     IEnumerator StartFreezeIntro()
     {
         s_disablePower = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.0f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[4].dialogue);
+        s_disablePower = false;
+        yield return null;
+    }
+
+    IEnumerator StartOnGoingBackToPhase5()
+    {
+        s_disablePower = true;
+        yield return new WaitForSeconds(2.0f);
+        GameUIHandler.Instance.StartDialogue(dialogueAsset[5].dialogue);
         s_disablePower = false;
         yield return null;
     }
@@ -185,7 +192,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator StartFirstFreeze()
     {
         s_disablePower = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2.0f);
         GameUIHandler.Instance.StartDialogue(dialogueAsset[6].dialogue);
         s_disablePower = false;
         yield return null;

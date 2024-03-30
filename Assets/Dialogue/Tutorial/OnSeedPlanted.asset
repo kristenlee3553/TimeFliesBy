@@ -25,8 +25,6 @@ MonoBehaviour:
   - dialogue: I don't expect much because it is too advanced for you.
     name: TimeLord
     checkpoint: 0
-  - dialogue: 'Fairy, move time forward by pressing E.
-
-'
+  - dialogue: Fairy, move time forward by pressing E.
     name: TimeLord
     checkpoint: 1

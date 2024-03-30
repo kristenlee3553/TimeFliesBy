@@ -1,31 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeReposition : MonoBehaviour, IReposition
+public class TreeReposition3 : MonoBehaviour, IReposition
 {
     private IReposition iRep;
-    private BoxCollider2D collider;
 
     private void Start()
     {
         iRep = this;
-        collider = GetComponent<BoxCollider2D>();
     }
 
     public void Reposition(GameObject wizard)
     {
-        Vector2 closestPoint = collider.ClosestPoint(wizard.transform.position);
-        closestPoint.y += 0.5f;
+        Vector2 curPos = wizard.transform.position;
+        Vector3 newPosition = new(1.777f, -3.319f, 0);
+        if (curPos.x < 0)
+        {
+            newPosition.x = -1.79f;
+            newPosition.y = -3.3f;
+        }
 
-        wizard.transform.position = closestPoint;
+        wizard.transform.position = newPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Wizard"))
         {
-            GameManager.s_reposition[3] = iRep;
+            GameManager.s_reposition[4] = iRep;
         }
     }
 
@@ -33,7 +34,7 @@ public class TreeReposition : MonoBehaviour, IReposition
     {
         if (collision.gameObject.CompareTag("Wizard"))
         {
-            GameManager.s_reposition[3] = iRep;
+            GameManager.s_reposition[4] = iRep;
         }
 
     }
@@ -42,7 +43,7 @@ public class TreeReposition : MonoBehaviour, IReposition
     {
         if (collision.gameObject.CompareTag("Wizard") && GameManager.wizardCollisions != 1)
         {
-            GameManager.s_reposition[3] = null;
+            GameManager.s_reposition[4] = null;
         }
     }
 }

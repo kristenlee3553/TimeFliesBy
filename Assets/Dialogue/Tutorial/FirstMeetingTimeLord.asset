@@ -36,7 +36,7 @@ MonoBehaviour:
   - dialogue: Except...
     name: TimeLord
     checkpoint: 0
-  - dialogue: This one high level spell.
+  - dialogue: There is this one high level spell.
     name: TimeLord
     checkpoint: 0
   - dialogue: "I don\u2019t expect you two to understand it immediately because it

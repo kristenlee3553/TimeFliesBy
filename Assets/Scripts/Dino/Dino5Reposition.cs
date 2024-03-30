@@ -3,14 +3,12 @@ using UnityEngine;
 public class Dino5Reposition : MonoBehaviour, IReposition
 {
     private IReposition iRep;
-    private EdgeCollider2D collider;
 
     private bool reposition;
 
     private void Start()
     {
         iRep = this;
-        collider = GetComponent<EdgeCollider2D>();
     }
 
     private void Update()
@@ -32,10 +30,13 @@ public class Dino5Reposition : MonoBehaviour, IReposition
 
     public void Reposition(GameObject wizard)
     {
-        Vector2 closestPoint = collider.ClosestPoint(wizard.transform.position);
-        closestPoint.y += 0.5f;
+        Vector2 curPos = wizard.transform.position;
+        Vector3 newPos = new(1.7f, 0.89f, 0);
 
-        wizard.transform.position = closestPoint;
+        if (curPos.x > 1.7f)
+        {
+            wizard.transform.position = newPos;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

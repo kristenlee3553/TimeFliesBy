@@ -19,10 +19,8 @@ MonoBehaviour:
   - dialogue: Could you go any slower?
     name: TimeLord
     checkpoint: 0
-  - dialogue: 'I see... Since I''m freezing this apple, it will not disapp
-
-      ear
-      when I change time.'
+  - dialogue: I see... Since I'm freezing this apple, it will not disappear when
+      I change time.
     name: Fairy
     checkpoint: 1
   - dialogue: I can only freeze one object at a time though...

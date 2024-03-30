@@ -19,10 +19,11 @@ public class ChangeTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool powerDisabled = fairyMove.IsPowerDisabled();
         // Wacky code in the second half.
         // There was a bug that left me scratching my head for a few hours
         // This was the solution and I'm too tired to find a more elegant way
-        if (!fairyMove.IsPowerDisabled() && GameManager.s_level != "Tut" || TutorialManager.s_firstPower)
+        if (!powerDisabled && GameManager.s_level != "Tut" || TutorialManager.s_firstPower && !powerDisabled)
         {
             // Go back in time
             if (Input.GetKeyUp(KeyCode.Q))
