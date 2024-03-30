@@ -16,6 +16,7 @@ TagManager:
   - Orb0
   - Apple
   - Seed
+  - Cart
   layers:
   - Default
   - TransparentFX
@@ -52,6 +53,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 526784685
+    locked: 0
+  - name: MiddleGround
+    uniqueID: 910376581
     locked: 0
   - name: Moveable
     uniqueID: 4015893231

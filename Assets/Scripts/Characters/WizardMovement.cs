@@ -106,6 +106,7 @@ public class WizardMovement : MonoBehaviour
     /// <summary>
     /// Max distance wizard can fall before dying from fall damage
     /// </summary>
+    //private readonly float maxFallDistance = 3.5f;
     private readonly float maxFallDistance = 3.5f;
 
     private bool dead = false;

@@ -7,7 +7,6 @@ public class Door2Interactable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        GameManager.s_nextPhase = 2;
         GameManager.s_lastScene = "";
         GameManager.s_firstPhase = 1;
         GameManager.s_wizardResetX = -7.56f;

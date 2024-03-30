@@ -16,11 +16,6 @@ public static class GameManager
     public static int s_curPhase = 1;
 
     /// <summary>
-    /// Next Phase to load
-    /// </summary>
-    public static int s_nextPhase = 2;
-
-    /// <summary>
     /// Name of the level, not including phase number
     /// </summary>
     public static string s_level = "Dino";
@@ -55,7 +50,7 @@ public static class GameManager
     /// <summary>
     /// Wizard's starting x position
     /// </summary>
-    public static float s_wizardResetX = -7.53f;
+    public static float s_wizardResetX = -2.07f;
 
     // dino -> -7.53f;
     // tutorial -> -7.56f
@@ -63,7 +58,7 @@ public static class GameManager
     /// <summary>
     /// Wizard's starting y position
     /// </summary>
-    public static float s_wizardResetY = 1.07f;
+    public static float s_wizardResetY = 4.43f;
 
     // dino -> 1.07f;
     // tutorial -> -3.19f

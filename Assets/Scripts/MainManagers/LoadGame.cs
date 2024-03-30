@@ -33,7 +33,7 @@ public class LoadGame : MonoBehaviour
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Preserve, KeyCode.Space);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.P);
 
-        StartCoroutine(SetUpLevel());
+        //StartCoroutine(SetUpLevel());
     }
 
     IEnumerator SetUpLevel()
@@ -60,7 +60,7 @@ public class LoadGame : MonoBehaviour
 
         ResetManager.Instance.SetLevelRelatedObjects();
         //ResetManager.Instance.ResizeFairy(1.35f, 1.35f, 1);
-        //ResetManager.Instance.ResizeWizard(1.146864f, 1.076966f, 1);
+        //ResetManager.Instance.ResizeWizard(1.15f, 1.08f, 1);
         //ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
         //ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
 
