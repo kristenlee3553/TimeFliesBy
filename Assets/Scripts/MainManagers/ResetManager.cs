@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,6 +19,12 @@ public class ResetManager : MonoBehaviour
     private CapsuleCollider2D col;
     private Animator fairyAnim;
     private Animator wizardAnim;
+
+    /// <summary>
+    /// Level setup after generic scene change
+    /// If I knew about this I would have done this earlier
+    /// </summary>
+    public static event Action AfterSceneLogic;
 
     public static ResetManager Instance { get; private set; }
 
@@ -65,6 +72,7 @@ public class ResetManager : MonoBehaviour
         {
             SetLevelRelatedObjects();
             CheckOnSceneCollision();
+            AfterSceneLogic?.Invoke();
         }
     }
 
@@ -319,7 +327,7 @@ public class ResetManager : MonoBehaviour
         }
     }
 
-    private void StartDeathAnimation(bool resetLevel)
+    public void StartDeathAnimation(bool resetLevel)
     {
         StartCoroutine(DeathAnimation(resetLevel));
     }
@@ -328,7 +336,7 @@ public class ResetManager : MonoBehaviour
     ///  Show death animation. After calls a function to respawn Wizard to the checkpoint. 
     /// </summary>
     /// <returns></returns>
-    IEnumerator DeathAnimation(bool resetLevel)
+    private IEnumerator DeathAnimation(bool resetLevel)
     {
         // Pause input and reset character's variables and velocity
         DisableWizardInput(true);
@@ -493,5 +501,10 @@ public class ResetManager : MonoBehaviour
     public void RepositionFairy(float x, float y, float z)
     {
         fairyMove.RepositionFairy(x, y, z);
+    }
+
+    public void AddForceToWizard(Vector2 force)
+    {
+        wizardMove.AddForce(force);
     }
 }

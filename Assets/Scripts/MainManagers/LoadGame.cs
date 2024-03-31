@@ -33,11 +33,13 @@ public class LoadGame : MonoBehaviour
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Preserve, KeyCode.Space);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.P);
 
-        //StartCoroutine(SetUpLevel());
+        StartCoroutine(SetUpLevel());
     }
 
     IEnumerator SetUpLevel()
     {
+        GameManager.s_level = "MedOne";
+        GameManager.s_curScene = "MedOne1";
         // Uncomment for tutorial setup
         //GameManager.s_level = "Tut";
         //GameManager.s_curScene = "Tut1";

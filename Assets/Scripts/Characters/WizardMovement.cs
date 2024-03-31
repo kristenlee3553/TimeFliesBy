@@ -420,6 +420,15 @@ public class WizardMovement : MonoBehaviour
         }
     }
 
+    public void AddForce(Vector2 force)
+    {
+        rbWizard.velocity = Vector2.zero;
+        isFalling = false;
+        isGrounded = false;
+        isJumping = true;
+        rbWizard.AddForce(force, ForceMode2D.Impulse);
+    }
+
 
     // Handles flipping sprite
     private void Flip()

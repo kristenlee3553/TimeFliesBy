@@ -17,6 +17,11 @@ TagManager:
   - Apple
   - Seed
   - Cart
+  - Horse
+  - CannonTower
+  - CannonGround
+  - Lever
+  - NoTag
   layers:
   - Default
   - TransparentFX
@@ -57,7 +62,7 @@ TagManager:
   - name: MiddleGround
     uniqueID: 910376581
     locked: 0
-  - name: Moveable
+  - name: Middle2
     uniqueID: 4015893231
     locked: 0
   - name: Default
@@ -65,6 +70,9 @@ TagManager:
     locked: 0
   - name: Wizard
     uniqueID: 1462924965
+    locked: 0
+  - name: Foreground
+    uniqueID: 2112325391
     locked: 0
   - name: Fairy
     uniqueID: 3239129493

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68866482de49ff44ea493cad6305d39d
+guid: 566c86bd6e6bcc94b94bad0c99308866
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Horse_Walk_1
+      name: Dancers_Kneeling_Sprite_Sheet_0
       rect:
         serializedVersion: 2
-        x: 286
-        y: 89
-        width: 228
-        height: 145
+        x: 19
+        y: 34
+        width: 195
+        height: 238
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a52f462bcf22a9547a552f7420e9f4c2
-      internalID: -973195777
+      spriteID: 0b4d6138a4ce5394191c9fd86ba56206
+      internalID: -1990746191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_2
+      name: Dancers_Kneeling_Sprite_Sheet_1
       rect:
         serializedVersion: 2
-        x: 546
-        y: 87
-        width: 223
-        height: 154
+        x: 232
+        y: 28
+        width: 177
+        height: 216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 690fea1970ce2b54792c70a5e0fc1cc3
-      internalID: -517868636
+      spriteID: 3763a1bb1d484eb49861a40379c1481b
+      internalID: -1672948852
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_4
+      name: Dancers_Kneeling_Sprite_Sheet_2
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 89
-        width: 232
-        height: 150
+        x: 431
+        y: 35
+        width: 181
+        height: 222
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4dfc57f9cc101a48861f9212402c4de
-      internalID: -1416413492
+      spriteID: cfb9b761b64ef5a46ab2eb8aad9243a3
+      internalID: 1642712547
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_5
+      name: Dancers_Kneeling_Sprite_Sheet_3
       rect:
         serializedVersion: 2
-        x: 1326
-        y: 86
-        width: 227
-        height: 149
+        x: 636
+        y: 46
+        width: 191
+        height: 229
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8dfc7f75d0a21a46bf85ee056bc8478
-      internalID: 116298178
+      spriteID: ce95f95948a5410468eba0a93a3b2f0d
+      internalID: -739118427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dancers_Kneeling_Sprite_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 58
+        width: 176
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e8b7bf6f7511f44a6455a0bcab3b72
+      internalID: 906160330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dancers_Kneeling_Sprite_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 52
+        width: 170
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695d3cade06d8d543af6b2fadeff5b06
+      internalID: -370999750
       vertices: []
       indices: 
       edges: []
@@ -204,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Horse_Walk_1: -973195777
-      Horse_Walk_2: -517868636
-      Horse_Walk_3: 172865524
-      Horse_Walk_4: -1416413492
-      Horse_Walk_5: 116298178
-      W: -460130757
+      Dancers_Kneeling_Sprite_Sheet_0: -1990746191
+      Dancers_Kneeling_Sprite_Sheet_1: -1672948852
+      Dancers_Kneeling_Sprite_Sheet_2: 1642712547
+      Dancers_Kneeling_Sprite_Sheet_3: -739118427
+      Dancers_Kneeling_Sprite_Sheet_4: 906160330
+      Dancers_Kneeling_Sprite_Sheet_5: -370999750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -118,7 +118,7 @@ TextureImporter:
         width: 181
         height: 196
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -139,7 +139,7 @@ TextureImporter:
         width: 643
         height: 666
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -160,7 +160,7 @@ TextureImporter:
         width: 531
         height: 705
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,6 +168,27 @@ TextureImporter:
       bones: []
       spriteID: 17f3545a1b90958428b4c01f849afc61
       internalID: -811616946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleTop
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 653
+        width: 234
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bd85397e164aad4fa69e2182e2334ab
+      internalID: -1940047170
       vertices: []
       indices: 
       edges: []
@@ -185,6 +206,7 @@ TextureImporter:
     nameFileIdTable:
       Castle: -811616946
       CastleBroken: 1759229525
+      CastleTop: -1940047170
       Gate: -950170266
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 68866482de49ff44ea493cad6305d39d
+guid: acfaa3a8c6914be4f806a2f36e7d7351
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,76 +110,97 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Horse_Walk_1
+      name: Bridge
       rect:
         serializedVersion: 2
-        x: 286
-        y: 89
-        width: 228
-        height: 145
+        x: 48
+        y: 111
+        width: 342
+        height: 79
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a52f462bcf22a9547a552f7420e9f4c2
-      internalID: -973195777
+      spriteID: 218207671f7b6c3488de7443b5c37770
+      internalID: -1787626832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_2
+      name: AligatorMurky
       rect:
         serializedVersion: 2
-        x: 546
-        y: 87
-        width: 223
-        height: 154
+        x: 999
+        y: 114
+        width: 144
+        height: 194
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 690fea1970ce2b54792c70a5e0fc1cc3
-      internalID: -517868636
+      spriteID: 58380fa6fa4023f43843862475475407
+      internalID: 98061638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_4
+      name: Aligator
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 89
-        width: 232
-        height: 150
+        x: 1205
+        y: 53
+        width: 284
+        height: 343
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4dfc57f9cc101a48861f9212402c4de
-      internalID: -1416413492
+      spriteID: 40334b25db14cbe49bdadd6bda5c1a12
+      internalID: 627818737
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Horse_Walk_5
+      name: BridgeGray
       rect:
         serializedVersion: 2
-        x: 1326
-        y: 86
-        width: 227
-        height: 149
+        x: 822
+        y: 118
+        width: 91
+        height: 323
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f97152f1a1a106e43811708088c34d4f
+      internalID: -1669960714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BridgeTilt
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 121
+        width: 300
+        height: 248
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8dfc7f75d0a21a46bf85ee056bc8478
-      internalID: 116298178
+      spriteID: 5ebb19e76d0094d42ad7e6f0639d03c5
+      internalID: -854072541
       vertices: []
       indices: 
       edges: []
@@ -204,12 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Horse_Walk_1: -973195777
-      Horse_Walk_2: -517868636
-      Horse_Walk_3: 172865524
-      Horse_Walk_4: -1416413492
-      Horse_Walk_5: 116298178
-      W: -460130757
+      Aligator: 627818737
+      AligatorMurky: 98061638
+      Bridge: -1787626832
+      BridgeGray: -1669960714
+      BridgeTilt: -854072541
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
