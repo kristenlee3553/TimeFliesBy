@@ -82,7 +82,6 @@ public class WizardMovement : MonoBehaviour
     Animator animator;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    public Transform headCheck;
     private SpriteRenderer sr;
 
     // --------------- Physics ------------------------
@@ -502,6 +501,7 @@ public class WizardMovement : MonoBehaviour
         isFrozen = false;
         rbWizard.velocity = Vector2.zero;
         lastY = transform.position.y; // Probably will cause some bugs
+        transform.eulerAngles = new(0, 0, 0);
     }
 
     public void StopVelocity()

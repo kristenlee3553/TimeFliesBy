@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,9 @@ using UnityEngine;
 public class FreezeObject : MonoBehaviour
 {
     private FairyMovement fairyMove;
+
+    public static Action OnObjectRelease;
+    public static Action OnObjectFreeze;
 
     private void Start()
     {
@@ -24,20 +28,23 @@ public class FreezeObject : MonoBehaviour
                 // Stop animation
                 PreserveManager.Instance.SetHoldingAnimation(false);
 
+                GameObject preservedObject = PreserveManager.Instance.GetPreservedObject();
 
                 // Wizard specific
-                if (PreserveManager.Instance.GetPreservedObject().CompareTag("Wizard"))
+                if (preservedObject.CompareTag("Wizard"))
                 {
                     PreserveManager.Instance.SetPreservingWizard(false);
-                    PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
+                    preservedObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+                    preservedObject.GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
 
-                // Highlight color
-                PreserveManager.Instance.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.Instance.highlightColor;
-
                 // Update objects
-                PreserveManager.Instance.SetPreservableObject(PreserveManager.Instance.GetPreservedObject());
+                PreserveManager.Instance.SetPreservableObject(preservedObject);
                 PreserveManager.Instance.SetPreservedObject(null);
+
+
+                // Show prompt
+                preservedObject.GetComponent<PreservableObject>().ShowPrompt(true);
 
             }
 
@@ -47,20 +54,23 @@ public class FreezeObject : MonoBehaviour
                 // Set hold animation
                 PreserveManager.Instance.SetHoldingAnimation(true);
 
+                GameObject preservable = PreserveManager.Instance.GetPreservableObject();
+
                 // Wizard specific
-                if (PreserveManager.Instance.GetPreservableObject().CompareTag("Wizard"))
+                if (preservable.CompareTag("Wizard"))
                 {
                     PreserveManager.Instance.SetPreservingWizard(true);
-                    PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
+                    preservable.GetComponent<Rigidbody2D>().gravityScale = 0;
+                    preservable.GetComponent<SpriteRenderer>().color = Color.white;
                 }
 
-                PreserveManager.Instance.SetPreservedObject(PreserveManager.Instance.GetPreservableObject());
+                PreserveManager.Instance.SetPreservedObject(preservable);
 
                 // Object no longer preservable
                 PreserveManager.Instance.SetPreservableObject(null);
 
-                // Remove highlight color
-                PreserveManager.Instance.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.Instance.GetStartColor();
+                // Hide prompt
+                preservable.GetComponent<PreservableObject>().ShowPrompt(false);
 
             }
         }

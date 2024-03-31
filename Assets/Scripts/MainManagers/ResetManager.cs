@@ -374,7 +374,7 @@ public class ResetManager : MonoBehaviour
     /// True if fully reseting a level
     /// </summary>
     /// <returns></returns>
-    IEnumerator RespawnWizard(bool resetLevel)
+    private IEnumerator RespawnWizard(bool resetLevel)
     {
         // Scene change
         if (resetLevel)
@@ -502,9 +502,14 @@ public class ResetManager : MonoBehaviour
     {
         fairyMove.RepositionFairy(x, y, z);
     }
-
-    public void AddForceToWizard(Vector2 force)
+    
+    public void RotateWizard(float degrees)
     {
-        wizardMove.AddForce(force);
+        wizard.transform.rotation = Quaternion.Euler(Vector3.forward * degrees);
+    }
+
+    public void TurnOffGravity(bool turnOff)
+    {
+        rb.gravityScale = turnOff ? 0 : 1;
     }
 }

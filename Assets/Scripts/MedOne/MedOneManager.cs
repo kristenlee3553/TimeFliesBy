@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MedOneManager : MonoBehaviour
 {
-    [SerializeField] private GameObject lever;
     [SerializeField] private GameObject castle;
     [SerializeField] private GameObject brokenCastle;
     [SerializeField] private GameObject bridgeOpen;
@@ -10,15 +9,15 @@ public class MedOneManager : MonoBehaviour
     [SerializeField] private GameObject bridgeTilt;
     [SerializeField] private GameObject gate;
 
-    private SpriteRenderer leverSprite;
     private SpriteRenderer gateSprite;
 
     public static bool leverFlipped = false;
 
+    private bool bridgeIsDown;
+
     // Start is called before the first frame update
     void Start()
     {
-        leverSprite = lever.GetComponent<SpriteRenderer>();
         gateSprite = gate.GetComponent<SpriteRenderer>();
     }
 
@@ -28,6 +27,7 @@ public class MedOneManager : MonoBehaviour
         if (leverFlipped)
         {
             leverFlipped = false;
+            bridgeIsDown = !bridgeIsDown;
             SetUpBridge(GameManager.s_curPhase);
         }
     }
@@ -43,7 +43,6 @@ public class MedOneManager : MonoBehaviour
 
     public void SetUpBridge(int phase)
     {
-        bool bridgeIsDown = leverSprite.flipX;
         bridgeDown.SetActive(false);
         bridgeOpen.SetActive(false);
         bridgeTilt.SetActive(false);
@@ -97,11 +96,11 @@ public class MedOneManager : MonoBehaviour
         { 
             if (phase == 2)
             {
-                leverSprite.flipX = true;
+                bridgeIsDown = true;
             }
             else
             {
-                leverSprite.flipX = false;
+                bridgeIsDown = false;
             }
         } 
     }

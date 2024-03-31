@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5023723612326873198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8273418700400188416}
-  m_Layer: 0
-  m_Name: HeadChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8273418700400188416
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5023723612326873198}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.111, y: 0.57, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8800562642811448416}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6097852314365031062
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +67,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6307255641630430368}
-  - {fileID: 8273418700400188416}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &512648013489288240
@@ -201,7 +169,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  headCheck: {fileID: 8273418700400188416}
+  headCheck: {fileID: 0}
   noFriction: {fileID: 6200000, guid: 370280a420372544b84c4a6e874ec61c, type: 2}
   wizardFriction: {fileID: 6200000, guid: beb2721c106a8e840bfcc10e2cb7513d, type: 2}
 --- !u!114 &-4228443284578964903
@@ -216,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25b41b801ef0ad409171ea4dcebcf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: {fileID: 0}
+  highlightColor: {r: 1, g: 0.9549066, b: 0, a: 1}
 --- !u!95 &3141412735876915512
 Animator:
   serializedVersion: 5
