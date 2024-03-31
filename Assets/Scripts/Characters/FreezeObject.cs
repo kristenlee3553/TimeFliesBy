@@ -2,7 +2,6 @@ using UnityEngine;
 
 /// <summary>
 /// Script that allows the fairy to freeze an object
-/// NEED TO ADD ANIMATION
 /// </summary>
 public class FreezeObject : MonoBehaviour
 {
@@ -16,51 +15,52 @@ public class FreezeObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!fairyMove.noInputFairy)
+        // Can use power as long as power is not disabled
+        if (!fairyMove.IsPowerDisabled())
         {
             // If fairy is already preserving an object and wants to release object
-            if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.IsPreserving())
+            if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.Instance.IsPreserving())
             {
                 // Stop animation
-                GetComponent<SpriteRenderer>().color = Color.white; //FILLER CODE
+                PreserveManager.Instance.SetHoldingAnimation(false);
+
 
                 // Wizard specific
-                if (PreserveManager.GetPreservedObject().CompareTag("Wizard"))
+                if (PreserveManager.Instance.GetPreservedObject().CompareTag("Wizard"))
                 {
-                    PreserveManager.SetPreservingWizard(false);
-                    PreserveManager.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
+                    PreserveManager.Instance.SetPreservingWizard(false);
+                    PreserveManager.Instance.GetPreservedObject().GetComponent<Rigidbody2D>().gravityScale = 1;
                 }
 
                 // Highlight color
-                PreserveManager.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.highlightColor;
+                PreserveManager.Instance.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.Instance.highlightColor;
 
                 // Update objects
-                PreserveManager.SetPreservableObject(PreserveManager.GetPreservedObject());
-                PreserveManager.SetPreservedObject(null);
+                PreserveManager.Instance.SetPreservableObject(PreserveManager.Instance.GetPreservedObject());
+                PreserveManager.Instance.SetPreservedObject(null);
 
             }
 
             // If Fairy is near object that can be preserved and user chooses to preserve object
-            else if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.CanPreserve())
+            else if (Input.GetKeyUp(KeyCode.Space) && PreserveManager.Instance.CanPreserve())
             {
                 // Set hold animation
-                GetComponent<SpriteRenderer>().color = Color.magenta; //FILLER CODE
+                PreserveManager.Instance.SetHoldingAnimation(true);
 
                 // Wizard specific
-                if (PreserveManager.GetPreservableObject().CompareTag("Wizard"))
+                if (PreserveManager.Instance.GetPreservableObject().CompareTag("Wizard"))
                 {
-                    PreserveManager.SetPreservingWizard(true);
-                    PreserveManager.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
+                    PreserveManager.Instance.SetPreservingWizard(true);
+                    PreserveManager.Instance.GetPreservableObject().GetComponent<Rigidbody2D>().gravityScale = 0;
                 }
 
-                // Set object fairy is preserving
-                PreserveManager.SetPreservedObject(PreserveManager.GetPreservableObject());
+                PreserveManager.Instance.SetPreservedObject(PreserveManager.Instance.GetPreservableObject());
 
                 // Object no longer preservable
-                PreserveManager.SetPreservableObject(null);
+                PreserveManager.Instance.SetPreservableObject(null);
 
                 // Remove highlight color
-                PreserveManager.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.GetStartColor();
+                PreserveManager.Instance.GetPreservedObject().GetComponent<SpriteRenderer>().color = PreserveManager.Instance.GetStartColor();
 
             }
         }

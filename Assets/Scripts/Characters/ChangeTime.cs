@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Script that controls when wizard wants to move time back and forth
@@ -9,29 +7,38 @@ using UnityEngine.SceneManagement;
 public class ChangeTime : MonoBehaviour
 {
     // Script that manages reseting of level
-    private ResetManager resetManager;
     private FairyMovement fairyMove;
+    private Animator animator;
 
     private void Start()
     {
         fairyMove = GetComponent<FairyMovement>();
-        resetManager = GetComponent<ResetManager>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!fairyMove.noInputFairy)
+        bool powerDisabled = fairyMove.IsPowerDisabled();
+        // Wacky code in the second half.
+        // There was a bug that left me scratching my head for a few hours
+        // This was the solution and I'm too tired to find a more elegant way
+        if (!powerDisabled && GameManager.s_level != "Tut" || TutorialManager.s_firstPower && !powerDisabled)
         {
             // Go back in time
             if (Input.GetKeyUp(KeyCode.Q))
             {
-
                 // If not at first phase
                 if (!MinPhase())
                 {
-                    GameManager.s_phase--;
-                    resetManager.ChangePhase();
+
+                    if (!PreserveManager.Instance.IsPreserving())
+                    {
+                        animator.SetTrigger("Power");
+                    }
+
+                    // Change scene
+                    StartCoroutine(ResetManager.Instance.ChangeScene(GameManager.s_curPhase - 1, GameManager.s_level));
                 }
 
             }
@@ -42,8 +49,12 @@ public class ChangeTime : MonoBehaviour
                 // If not at last phase
                 if (!MaxPhase())
                 {
-                    GameManager.s_phase++;
-                    resetManager.ChangePhase();
+                    StartCoroutine(ResetManager.Instance.ChangeScene(GameManager.s_curPhase + 1, GameManager.s_level));
+
+                    if (!PreserveManager.Instance.IsPreserving())
+                    {
+                        animator.SetTrigger("Power");
+                    }
                 }
             }
         }
@@ -56,7 +67,7 @@ public class ChangeTime : MonoBehaviour
     /// <returns></returns>
     private bool MaxPhase()
     {
-        return GameManager.s_phase == 5;
+        return GameManager.s_curPhase == 5;
     }
 
     /// <summary>
@@ -65,7 +76,7 @@ public class ChangeTime : MonoBehaviour
     /// <returns></returns>
     private bool MinPhase()
     {
-        return GameManager.s_phase == 1;
+        return GameManager.s_curPhase == 1;
     }
 
  

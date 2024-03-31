@@ -12,7 +12,7 @@ public class LoadGame : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive); // Background
+        //SceneManager.LoadScene("PreTutBack", LoadSceneMode.Additive); // Background
         //SceneManager.LoadScene("GameScene", LoadSceneMode.Additive); // Characters
 
         // Set up key bindings
@@ -33,12 +33,24 @@ public class LoadGame : MonoBehaviour
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Preserve, KeyCode.Space);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.P);
 
-        StartCoroutine(SetUpLevel());
+        //StartCoroutine(SetUpLevel());
     }
 
     IEnumerator SetUpLevel()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_phase.ToString(), LoadSceneMode.Additive); // Phase 1
+        // Uncomment for tutorial setup
+        //GameManager.s_level = "Tut";
+        //GameManager.s_curScene = "Tut1";
+        //GameManager.s_level = "PreTut";
+        //GameManager.s_curScene = "PreTut1";
+        //GameManager.s_firstPhase = 1;
+        //GameManager.s_curPhase = 1;
+        //GameManager.s_wizardResetX = -7.7f;
+        //GameManager.s_wizardResetY = -3.1f;
+        //GameManager.s_fairyResetX = -6.08f;
+        //GameManager.s_fairyResetY = -2.63f;
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
         // Wait until scene is loaded
         while (!asyncLoad.isDone)
@@ -46,14 +58,14 @@ public class LoadGame : MonoBehaviour
             yield return null;
         }
 
-        if (GameManager.s_level == "Dino")
-        {
-            GameObject nest = GameObject.FindGameObjectWithTag("Nest");
+        ResetManager.Instance.SetLevelRelatedObjects();
+        //ResetManager.Instance.ResizeFairy(1.35f, 1.35f, 1);
+        //ResetManager.Instance.ResizeWizard(1.15f, 1.08f, 1);
+        //ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
+        //ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
 
-            if (nest != null)
-            {
-                nest.SetActive(false);
-            }
-        }
+        // uncomment for tutorial
+        //GameUIHandler.Instance.HideOrbDisplay();
+        //GameUIHandler.Instance.HideTimeBar();
     }
 }

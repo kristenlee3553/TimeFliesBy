@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8716153867255738497}
   - component: {fileID: 3283093309372152246}
   - component: {fileID: 8543675952511595076}
-  - component: {fileID: 4501045157178893621}
+  - component: {fileID: 601899922010309535}
   m_Layer: 0
   m_Name: Fairy
   m_TagString: Fairy
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.38, y: -2.19, z: 0}
-  m_LocalScale: {x: 0.7751, y: 0.7864, z: 1}
+  m_LocalScale: {x: 0.8706774, y: 0.74271876, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: -1055837803
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -840425901, guid: c562a8b2dbfb91547984ec61ffdd4d6e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5daaf53d95ed6cd4fb91bb490c67ea9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.27, y: 1.61}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,7 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   rbFairy: {fileID: 7328277961955968279}
-  noInputFairy: 0
 --- !u!50 &7328277961955968279
 Rigidbody2D:
   serializedVersion: 4
@@ -164,18 +163,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020534575, y: 0.2772177}
+  m_Offset: {x: -0.024812818, y: -0.25904527}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.02}
-    pivot: {x: 0.49738333, y: 0.16203655}
-    oldSize: {x: 2.34, y: 1.54}
-    newSize: {x: 1, y: 1}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.7, y: 2.22}
+    newSize: {x: 2.27, y: 1.61}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5186154, y: 0.9855646}
+  m_Size: {x: 0.63403404, y: 0.61892813}
   m_EdgeRadius: 0
 --- !u!114 &3283093309372152246
 MonoBehaviour:
@@ -201,17 +200,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa36d5846afcd564e99166d50b37209d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4501045157178893621
-MonoBehaviour:
+--- !u!95 &601899922010309535
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281802095884592762}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54c12052679ed0244bd7fddcb44f44f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wizard: {fileID: 0}
-  fairy: {fileID: 1281802095884592762}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: edd2c734678f89443800a6816b0deff0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

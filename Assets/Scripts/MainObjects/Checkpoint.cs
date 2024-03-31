@@ -10,6 +10,11 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     [SerializeField] private Transform checkpoint;
 
+    /// <summary>
+    /// Sets hint when user passes checkpoint. Leave empty if no hint change.
+    /// </summary>
+    [SerializeField] private string hint;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Set checkpoint for wizard
@@ -17,7 +22,12 @@ public class Checkpoint : MonoBehaviour
         {
             GameManager.s_wizardRespawnX = checkpoint.position.x;
             GameManager.s_wizardRespawnY = checkpoint.position.y;
-            GameManager.s_checkpointPhase = GameManager.s_phase;
+            GameManager.s_checkpointPhase = GameManager.s_curPhase;
+
+            if (!hint.Equals(""))
+            {
+                GameUIHandler.Instance.SetHintText(hint);
+            }
         }
     }
 }
