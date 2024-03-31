@@ -49,11 +49,6 @@ public class GameUIHandler : MonoBehaviour
     private VisualElement m_nextDialogueButton;
     private VisualElement m_skipDialogueButton;
 
-    [SerializeField] GameObject pauseMenuObject;
-
-    private ResetManager resetManager;
-    private PauseMenu pauseMenuManager;
-
     private UIDocument uiDocument;
     private VisualElement hintUI;
 
@@ -98,9 +93,6 @@ public class GameUIHandler : MonoBehaviour
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
         m_hintButton = uiDocument.rootVisualElement.Q<VisualElement>("HintButton");
         m_menuButtonContanier = uiDocument.rootVisualElement.Q<VisualElement>("MenuButtonContainer");
-
-        resetManager = wizard.GetComponent<ResetManager>();
-        pauseMenuManager = pauseMenuObject.GetComponent<PauseMenu>();
 
         m_dialogue = uiDocument.rootVisualElement.Q<VisualElement>("DialogueContainer");
         m_dialogueText = uiDocument.rootVisualElement.Q<TextElement>("DialogueText");
@@ -187,7 +179,8 @@ public class GameUIHandler : MonoBehaviour
 
     private void MenuEvent(ClickEvent evt)
     {
-        pauseMenuManager.Pause();
+        Debug.Log("Menu Clicked");
+        Application.Quit();
     }
 
     /// <summary>
