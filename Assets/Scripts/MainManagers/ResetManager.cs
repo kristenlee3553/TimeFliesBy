@@ -512,4 +512,14 @@ public class ResetManager : MonoBehaviour
     {
         rb.gravityScale = turnOff ? 0 : 1;
     }
+
+    public bool GetWizardFacingDirection()
+    {
+        return wizardSpriteRenderer.flipX;
+    }
+
+    public void FlipWizardSprite(bool flipX)
+    {
+        wizardSpriteRenderer.flipX = flipX;
+    }
 }

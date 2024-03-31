@@ -1090,6 +1090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Castle
       objectReference: {fileID: 0}
+    - target: {fileID: 951387862770049574, guid: 33ba2fb54c4b9534c8413e0a573c9cd7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.31
+      objectReference: {fileID: 0}
     - target: {fileID: 1065934408692623413, guid: 33ba2fb54c4b9534c8413e0a573c9cd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.4828

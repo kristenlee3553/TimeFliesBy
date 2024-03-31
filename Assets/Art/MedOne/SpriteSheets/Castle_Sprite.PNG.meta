@@ -181,7 +181,7 @@ TextureImporter:
         width: 234
         height: 197
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,6 +189,27 @@ TextureImporter:
       bones: []
       spriteID: 5bd85397e164aad4fa69e2182e2334ab
       internalID: -1940047170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CastleMiddle
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 654
+        width: 297
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22a33ab44ecd03f429429bd69e8edfca
+      internalID: 1088804269
       vertices: []
       indices: 
       edges: []
@@ -206,6 +227,7 @@ TextureImporter:
     nameFileIdTable:
       Castle: -811616946
       CastleBroken: 1759229525
+      CastleMiddle: 1088804269
       CastleTop: -1940047170
       Gate: -950170266
   mipmapLimitGroupName: 

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7933442211802867516}
   - component: {fileID: 5428630799335947869}
-  m_Layer: 0
+  - component: {fileID: 7242546610379726603}
+  m_Layer: 6
   m_Name: CastleBroken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,3 +85,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &7242546610379726603
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156262468005144178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -1.8247818, y: 2.4627836}
+  - {x: -1.1263793, y: 2.4596295}
+  - {x: -1.1141194, y: 3.1164126}
+  - {x: 0.08497061, y: 3.0921404}
+  - {x: 0.08960283, y: 2.2626495}
+  - {x: 0.5046275, y: 2.2708616}
+  - {x: 0.52293336, y: 2.0211048}
+  - {x: 0.92329365, y: 1.7687603}
+  - {x: 1.2767568, y: 1.7371733}
+  - {x: 1.5164417, y: 1.9724634}
+  - {x: 2.3177571, y: 1.9755499}
+  - {x: 2.4746845, y: 1.7280762}
+  - {x: 3.1099923, y: 1.719637}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

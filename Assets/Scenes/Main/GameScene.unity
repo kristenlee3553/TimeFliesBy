@@ -543,6 +543,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 512648013489288240, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1153100598425247320, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: eventManager
       value: 
@@ -609,11 +613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.39
+      value: -2.84
       objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.63
+      value: -2.41
       objectReference: {fileID: 0}
     - target: {fileID: 8800562642811448416, guid: 5a3b7b088c3853f4c90c5e74f22bece3, type: 3}
       propertyPath: m_LocalPosition.z

@@ -32,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2580404300709026034}
+  - {fileID: 951387862770049574}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7872896803169904223
@@ -139,6 +140,7 @@ GameObject:
   - component: {fileID: 2580404300709026034}
   - component: {fileID: 744281418174950930}
   - component: {fileID: 8815711616811451796}
+  - component: {fileID: 7048203196552556490}
   m_Layer: 6
   m_Name: CastleTop
   m_TagString: Untagged
@@ -248,11 +250,56 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -1.1458657, y: 0.8779964}
-  - {x: -1.142174, y: 0.1439265}
-  - {x: 1.1712666, y: 0.13423592}
-  - {x: 1.1897357, y: 0.9491539}
+  - {x: -1.1279118, y: 0.8825009}
+  - {x: -1.1152437, y: 0.38266158}
+  - {x: 1.1533127, y: 0.36396202}
+  - {x: 1.1617352, y: 2.6712837}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &7048203196552556490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4899397151821284170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb73de707ca9f2345bf66610f8c7551f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoint: {fileID: 951387862770049574}
+  hint: This lever seems to control the bridge...
+--- !u!1 &5424041396778973509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 951387862770049574}
+  m_Layer: 6
+  m_Name: Checkpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &951387862770049574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5424041396778973509}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.45, y: 3.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1065934408692623413}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
