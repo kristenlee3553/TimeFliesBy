@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gate : MonoBehaviour, IInteractable
+public class OpenStable : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private GameObject prompt;
 
     public void Interact()
     {
-        if (GameManager.s_curPhase == 5)
+        if (!MedOneManager.playStableDia)
         {
-            MedOneManager.tempGateDia = true;
+            MedOneManager.playStableDia = true;
         }
     }
 
@@ -22,7 +22,7 @@ public class Gate : MonoBehaviour, IInteractable
 
     public void ShowInteractable()
     {
-        if (GameManager.s_curPhase == 5)
+        if (MedOneManager.noHorsesInFrontOfStable)
         {
             prompt.SetActive(true);
         }

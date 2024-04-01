@@ -54,6 +54,7 @@ public class GameUIHandler : MonoBehaviour
 
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
+    public static event Action OnResetEvent;
 
     bool skipLineTriggered;
     bool skipDialogueTriggered;
@@ -155,6 +156,8 @@ public class GameUIHandler : MonoBehaviour
     private void ResetEvent(ClickEvent evt)
     {
         ResetManager.Instance.ResetLevel(true);
+
+        OnResetEvent?.Invoke();
 
         if (GameManager.s_level == "Tut")
         {

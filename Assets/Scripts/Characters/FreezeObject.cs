@@ -8,6 +8,7 @@ public class FreezeObject : MonoBehaviour
 {
     private FairyMovement fairyMove;
 
+    // SHOULD HAVE USED THIS EARLIER -> Too scared to rewrite all the code
     public static Action OnObjectRelease;
     public static Action OnObjectFreeze;
 
@@ -42,9 +43,10 @@ public class FreezeObject : MonoBehaviour
                 PreserveManager.Instance.SetPreservableObject(preservedObject);
                 PreserveManager.Instance.SetPreservedObject(null);
 
-
                 // Show prompt
                 preservedObject.GetComponent<PreservableObject>().ShowPrompt(true);
+
+                OnObjectRelease?.Invoke();
 
             }
 
@@ -71,6 +73,8 @@ public class FreezeObject : MonoBehaviour
 
                 // Hide prompt
                 preservable.GetComponent<PreservableObject>().ShowPrompt(false);
+
+                OnObjectFreeze?.Invoke();
 
             }
         }

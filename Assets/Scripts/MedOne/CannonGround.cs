@@ -48,9 +48,8 @@ public class CannonGround : MonoBehaviour, IInteractable
             yield return new WaitForSeconds(.01f);
         }
 
-        // Either die to cannon ball or to water
+        // Die to cannon ball
         ResetManager.Instance.StartDeathAnimation(false);
-        //ResetManager.Instance.TurnOffGravity(false);
     }
     
     /// <summary>
@@ -90,12 +89,6 @@ public class CannonGround : MonoBehaviour, IInteractable
 
         ResetManager.Instance.TurnOffGravity(false);
         ResetManager.Instance.DisableAll(false);
-
-        // For some reason checkpoint isn't working
-        //GameUIHandler.Instance.SetHintText("This lever seems to control the bridge...");
-        //GameManager.s_wizardRespawnX = 5.05f;
-        //GameManager.s_wizardRespawnY = 2.92f;
-        //GameManager.s_checkpointPhase = GameManager.s_curPhase;
     }
 
     public void RemoveInteractable()

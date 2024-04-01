@@ -100,20 +100,26 @@ public class ResetManager : MonoBehaviour
             // Object to hide
             string tagToFind = PreserveManager.Instance.GetPreservedObject().tag;
 
-            // Find objects to hide
-            GameObject[] dups = GameObject.FindGameObjectsWithTag(tagToFind);
-            foreach (GameObject dup in dups)
+            if (tagToFind != "NoTag")
             {
-                // If object is not the same as preserved object
-                if (GameObject.ReferenceEquals(dup, PreserveManager.Instance.GetPreservedObject()) == false)
+                // Find objects to hide
+                GameObject[] dups = GameObject.FindGameObjectsWithTag(tagToFind);
+                foreach (GameObject dup in dups)
                 {
-                    // Hide object
-                    dup.SetActive(false);
+                    // If object is not the same as preserved object
+                    if (GameObject.ReferenceEquals(dup, PreserveManager.Instance.GetPreservedObject()) == false)
+                    {
+                        // Hide object
+                        dup.SetActive(false);
+                    }
                 }
+
+                // Move preserved object to scene
+                SceneManager.MoveGameObjectToScene(PreserveManager.Instance.GetPreservedObject(), 
+                    SceneManager.GetSceneByName(GameManager.s_curScene));
             }
 
-            // Move preserved object to scene
-            SceneManager.MoveGameObjectToScene(PreserveManager.Instance.GetPreservedObject(), SceneManager.GetSceneByName(GameManager.s_curScene));
+            
         }
     }
 
@@ -480,6 +486,14 @@ public class ResetManager : MonoBehaviour
         fairyAnim.SetTrigger("Power");
     }
 
+    public void StopFairyHold()
+    {
+        fairyAnim.SetBool("Holding", false);
+        PreserveManager.Instance.SetPreservedObject(null);
+        PreserveManager.Instance.SetPreservableObject(null);
+
+    } 
+
     /// <summary>
     /// Resizes wizard
     /// </summary>
@@ -511,11 +525,6 @@ public class ResetManager : MonoBehaviour
     public void TurnOffGravity(bool turnOff)
     {
         rb.gravityScale = turnOff ? 0 : 1;
-    }
-
-    public bool GetWizardFacingDirection()
-    {
-        return wizardSpriteRenderer.flipX;
     }
 
     public void FlipWizardSprite(bool flipX)

@@ -28,10 +28,10 @@ public class CannonTower : MonoBehaviour, IInteractable
         float newX = 5f;
         float newY = 2.8f;
 
-        for (int i = 1; i <= 100; i++)
+        for (int i = 1; i <= 50; i++)
         {
-            newX -= 0.0539f;
-            newY += 0.0185f;
+            newX -= 0.1078f;
+            newY += 0.037f;
             ResetManager.Instance.RepositionWizard(newX, newY, 0);
             ResetManager.Instance.FlipWizardSprite(false);
             yield return new WaitForSeconds(.01f);
