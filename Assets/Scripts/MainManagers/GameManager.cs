@@ -50,7 +50,7 @@ public static class GameManager
     /// <summary>
     /// Wizard's starting x position
     /// </summary>
-    public static float s_wizardResetX = -2.07f;
+    public static float s_wizardResetX = -7.7f;
 
     // dino -> -7.53f;
     // tutorial -> -7.56f
@@ -58,7 +58,7 @@ public static class GameManager
     /// <summary>
     /// Wizard's starting y position
     /// </summary>
-    public static float s_wizardResetY = 4.43f;
+    public static float s_wizardResetY = -3.1f;
 
     // dino -> 1.07f;
     // tutorial -> -3.19f
@@ -66,12 +66,12 @@ public static class GameManager
     /// <summary>
     /// Fairy's starting x position
     /// </summary>
-    public static float s_fairyResetX = -4.29f;
+    public static float s_fairyResetX = -6.08f;
 
     /// <summary>
     /// Fairy's starting y position
     /// </summary>
-    public static float s_fairyResetY = 2.56f;
+    public static float s_fairyResetY = -2.63f;
 
     // -------------- Respawn Point ---------------------
 

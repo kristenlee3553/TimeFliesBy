@@ -12,8 +12,19 @@ public class LoadGame : MonoBehaviour
 {
     void Awake()
     {
-        //SceneManager.LoadScene("PreTutBack", LoadSceneMode.Additive); // Background
-        //SceneManager.LoadScene("GameScene", LoadSceneMode.Additive); // Characters
+        // Load backgrounds according to which level it is
+        if (GameManager.s_level == "PreTut")
+        {
+            SceneManager.LoadScene("PreTutBack", LoadSceneMode.Additive);
+        }
+        else if (GameManager.s_level == "Dino")
+        {
+            SceneManager.LoadScene("DinoBack", LoadSceneMode.Additive);
+        }
+        else if (GameManager.s_level == "MedOne")
+        {
+            SceneManager.LoadScene("MedOneBack", LoadSceneMode.Additive);
+        }
 
         // Set up key bindings
         // ------------ FUTURE LOAD KEY BINDINGS FROM FILE ---------------
@@ -33,22 +44,49 @@ public class LoadGame : MonoBehaviour
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Preserve, KeyCode.Space);
         GameManager.s_keyBinds.Add(GameManager.KeyBind.Interact, KeyCode.P);
 
-        //StartCoroutine(SetUpLevel());
+        StartCoroutine(SetUpLevel());
     }
 
     IEnumerator SetUpLevel()
     {
-        // Uncomment for tutorial setup
-        //GameManager.s_level = "Tut";
-        //GameManager.s_curScene = "Tut1";
-        //GameManager.s_level = "PreTut";
-        //GameManager.s_curScene = "PreTut1";
-        //GameManager.s_firstPhase = 1;
-        //GameManager.s_curPhase = 1;
-        //GameManager.s_wizardResetX = -7.7f;
-        //GameManager.s_wizardResetY = -3.1f;
-        //GameManager.s_fairyResetX = -6.08f;
-        //GameManager.s_fairyResetY = -2.63f;
+        // Configure scene according to which level it is
+        if (GameManager.s_level == "PreTut")
+        {
+            GameManager.s_level = "PreTut";
+            GameManager.s_curScene = "PreTut1";
+            GameManager.s_firstPhase = 1;
+            GameManager.s_curPhase = 1;
+            GameManager.s_wizardResetX = -7.7f;
+            GameManager.s_wizardResetY = -3.1f;
+            GameManager.s_fairyResetX = -6.08f;
+            GameManager.s_fairyResetY = -2.63f;
+        }
+        else if (GameManager.s_level == "Dino")
+        {
+            GameManager.s_level = "Dino";
+            GameManager.s_curScene = "Dino1";
+            GameManager.s_firstPhase = 1;
+            GameManager.s_curPhase = 1;
+            GameManager.s_wizardResetX = -7.53f;
+            GameManager.s_wizardResetY = 1.07f;
+            GameManager.s_wizardRespawnX = -7.53f;
+            GameManager.s_wizardRespawnY = 1.07f;
+            GameManager.s_fairyResetX = -4.29f;
+            GameManager.s_fairyResetY = -2.56f;
+        }
+        else if (GameManager.s_level == "MedOne")
+        {
+            GameManager.s_level = "MedOne";
+            GameManager.s_curScene = "MedOne1";
+            GameManager.s_firstPhase = 1;
+            GameManager.s_curPhase = 1;
+            GameManager.s_wizardResetX = -3.78f;
+            GameManager.s_wizardResetY = -2.6f;
+            GameManager.s_wizardRespawnX = -3.78f;
+            GameManager.s_wizardRespawnY = -2.6f;
+            GameManager.s_fairyResetX = -2.83f;
+            GameManager.s_fairyResetY = -1.22f;
+        }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(GameManager.s_level + GameManager.s_curPhase.ToString(), LoadSceneMode.Additive); // Phase 1
 
@@ -58,14 +96,33 @@ public class LoadGame : MonoBehaviour
             yield return null;
         }
 
-        ResetManager.Instance.SetLevelRelatedObjects();
-        //ResetManager.Instance.ResizeFairy(1.35f, 1.35f, 1);
-        //ResetManager.Instance.ResizeWizard(1.15f, 1.08f, 1);
-        //ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
-        //ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
+        // Configure scene according to which level it is
+        if (GameManager.s_level == "PreTut")
+        {
+            ResetManager.Instance.SetLevelRelatedObjects();
+            ResetManager.Instance.ResizeWizard(1.15f, 1.08f, 1);
+            ResetManager.Instance.ResizeFairy(1.35f, 1.35f, 1);
+            ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
+            ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
 
-        // uncomment for tutorial
-        //GameUIHandler.Instance.HideOrbDisplay();
-        //GameUIHandler.Instance.HideTimeBar();
+            GameUIHandler.Instance.HideOrbDisplay();
+            GameUIHandler.Instance.HideTimeBar();
+        }
+        else if (GameManager.s_level == "Dino")
+        {
+            ResetManager.Instance.SetLevelRelatedObjects();
+            ResetManager.Instance.ResizeWizard(0.54f, 0.48f, 1.0f);
+            ResetManager.Instance.ResizeFairy(0.87f, 0.74f, 1.0f);
+            ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
+            ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
+        }
+        else if (GameManager.s_level == "MedOne")
+        {
+            ResetManager.Instance.SetLevelRelatedObjects();
+            ResetManager.Instance.ResizeWizard(0.54f, 0.48f, 1.0f);
+            ResetManager.Instance.ResizeFairy(0.87f, 0.74f, 1.0f);
+            ResetManager.Instance.RepositionFairy(GameManager.s_fairyResetX, GameManager.s_fairyResetY, 0);
+            ResetManager.Instance.RepositionWizard(GameManager.s_wizardResetX, GameManager.s_wizardResetY, 0);
+        }
     }
 }

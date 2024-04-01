@@ -2,11 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles functionality of GameUI
 /// </summary>
-public class GameUIHandler : MonoBehaviour
+public class GameUIHandler : MonoBehaviour, SaveDataInterface
 {
     /// <summary>
     /// UI that tells player what phase.
@@ -32,10 +33,16 @@ public class GameUIHandler : MonoBehaviour
     /// <summary>
     /// Contains 3 buttons
     /// </summary>
-    private VisualElement m_menuButtonContanier;
+    private VisualElement m_menuButtonContainer;
     
     private TextElement m_hintText;
     private VisualElement m_hintCloseButton;
+
+    private VisualElement m_backToGameButton;
+    private VisualElement m_settingsButton;
+    private VisualElement m_saveAndQuitButton;
+    private VisualElement m_quitButton;
+    private VisualElement m_inGameMenuCloseButton;
 
     private VisualElement m_dialogue;
     private VisualElement m_wizardProfile;
@@ -51,6 +58,7 @@ public class GameUIHandler : MonoBehaviour
 
     private UIDocument uiDocument;
     private VisualElement hintUI;
+    private VisualElement inGameMenuUI;
 
     public static event Action OnDialogueStarted;
     public static event Action OnDialogueEnded;
@@ -86,13 +94,14 @@ public class GameUIHandler : MonoBehaviour
     {
         uiDocument = GetComponent<UIDocument>();
         hintUI = uiDocument.rootVisualElement.Q<VisualElement>("HintUI");
+        inGameMenuUI = uiDocument.rootVisualElement.Q<VisualElement>("InGameMenuUI");
         m_Timebar = uiDocument.rootVisualElement.Q<VisualElement>("TimeBar");
         m_TimeContainer = uiDocument.rootVisualElement.Q<VisualElement>("TimeBarBackground");
         m_OrbContainer = uiDocument.rootVisualElement.Q<VisualElement>("OrbContainer");
         m_menuButton = uiDocument.rootVisualElement.Q<VisualElement>("MenuButton");
         m_resetButton = uiDocument.rootVisualElement.Q<VisualElement>("ResetButton");
         m_hintButton = uiDocument.rootVisualElement.Q<VisualElement>("HintButton");
-        m_menuButtonContanier = uiDocument.rootVisualElement.Q<VisualElement>("MenuButtonContainer");
+        m_menuButtonContainer = uiDocument.rootVisualElement.Q<VisualElement>("MenuButtonContainer");
 
         m_dialogue = uiDocument.rootVisualElement.Q<VisualElement>("DialogueContainer");
         m_dialogueText = uiDocument.rootVisualElement.Q<TextElement>("DialogueText");
@@ -108,12 +117,23 @@ public class GameUIHandler : MonoBehaviour
         m_hintCloseButton = uiDocument.rootVisualElement.Q<VisualElement>("HintCloseButton");
         m_hintText = uiDocument.rootVisualElement.Q<TextElement>("HintText");
 
+        m_backToGameButton = uiDocument.rootVisualElement.Q<VisualElement>("BackToGameButton");
+        m_settingsButton = uiDocument.rootVisualElement.Q<VisualElement>("SettingsButton");
+        m_saveAndQuitButton = uiDocument.rootVisualElement.Q<VisualElement>("SaveAndExitButton");
+        m_quitButton = uiDocument.rootVisualElement.Q<VisualElement>("ExitButton");
+        m_inGameMenuCloseButton = uiDocument.rootVisualElement.Q<VisualElement>("InGameMenuCloseButton");
+
         m_hintCloseButton.RegisterCallback<ClickEvent>(CloseHintMenu);
         m_hintButton.RegisterCallback<ClickEvent>(ShowHintMenu);
         m_skipDialogueButton.RegisterCallback<ClickEvent>(SkipDialogue);
         m_nextDialogueButton.RegisterCallback<ClickEvent>(SkipLine);
         m_resetButton.RegisterCallback<ClickEvent>(ResetEvent);
-        m_menuButton.RegisterCallback<ClickEvent>(MenuEvent);
+        m_menuButton.RegisterCallback<ClickEvent>(ShowInGameMenu);
+        m_inGameMenuCloseButton.RegisterCallback<ClickEvent>(CloseInGameMenu);
+        m_backToGameButton.RegisterCallback<ClickEvent>(CloseInGameMenu);
+        m_settingsButton.RegisterCallback<ClickEvent>(ShowSettings);
+        m_saveAndQuitButton.RegisterCallback<ClickEvent>(SaveAndQuit);
+        m_quitButton.RegisterCallback<ClickEvent>(Quit);
 
         SetPhase(GameManager.s_firstPhase);
         SetOrbCounter();
@@ -177,10 +197,37 @@ public class GameUIHandler : MonoBehaviour
         }
     }
 
-    private void MenuEvent(ClickEvent evt)
+    // Shows in game menu and disables input
+    private void ShowInGameMenu(ClickEvent evt)
     {
-        Debug.Log("Menu Clicked");
-        Application.Quit();
+        ResetManager.Instance.StopAllVelocity();
+        inGameMenuUI.style.display = DisplayStyle.Flex;
+        StopAllCoroutines();
+        ResetManager.Instance.DisableAll(true);
+    }
+
+    private void CloseInGameMenu(ClickEvent evt)
+    {
+        inGameMenuUI.style.display = DisplayStyle.None;
+        ResetManager.Instance.HandlePowerDisabling();
+        ResetManager.Instance.DisableWizardInput(false);
+        ResetManager.Instance.DisableFairyMovement(false);
+    }
+
+    private void ShowSettings(ClickEvent evt)
+    {
+        Debug.Log("Settings");
+    }
+
+    private void SaveAndQuit(ClickEvent evt)
+    {
+        SaveDataManager.instance.SaveGame();
+        SceneManager.LoadScene("HomePage");
+    }
+
+    private void Quit(ClickEvent evt)
+    {
+        SceneManager.LoadScene("HomePage");
     }
 
     /// <summary>
@@ -206,7 +253,16 @@ public class GameUIHandler : MonoBehaviour
             VisualElement orb = container.Q<VisualElement>("Orb");
             orb.SetEnabled(GameManager.s_curOrbs[x]);
         }
+    }
 
+    public void LoadData(GameData data)
+    {
+        GameManager.s_curOrbs = data.s_curOrbs;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.s_curOrbs = GameManager.s_curOrbs;
     }
 
     /// <summary>
@@ -222,7 +278,7 @@ public class GameUIHandler : MonoBehaviour
 
         // Hide other UI
         HideOrbDisplay();
-        m_menuButtonContanier.style.display = DisplayStyle.None;
+        m_menuButtonContainer.style.display = DisplayStyle.None;
         
         // Show Dialogue
         m_dialogue.style.display = DisplayStyle.Flex;
@@ -270,7 +326,7 @@ public class GameUIHandler : MonoBehaviour
 
         // UI
         m_dialogue.style.display = DisplayStyle.None;
-        m_menuButtonContanier.style.display = DisplayStyle.Flex;
+        m_menuButtonContainer.style.display = DisplayStyle.Flex;
     }
 
     /// <summary>
